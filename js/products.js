@@ -1,10 +1,9 @@
-var ListaAutos = [];
+let ListaAutos = [];
 
 document.addEventListener("DOMContentLoaded", function() {
     getJSONData(AUTOS).then(resultado => {
         if (resultado.status === "ok") {
             ListaAutos = resultado.data.products;
-            console.log(ListaAutos)
             showCarList()
         }
     })

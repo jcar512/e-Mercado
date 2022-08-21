@@ -1,5 +1,7 @@
+let loginButton = document.getElementById("loginButton")
+
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("button").addEventListener("click", function () {
+  loginButton.addEventListener("click", function () {
     let email = document.getElementById("typeEmailX-2");
     let pass = document.getElementById("typePasswordX-2");
 

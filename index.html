@@ -18,6 +18,8 @@
 
 <body>
   <main class="mt-5">
+
+    <!--Login-->
     <section class="vh-100" >
       <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -26,23 +28,25 @@
               <div class="card-body p-5 text-center">
     
                 <h3 class="mb-5">Inicio de sesión</h3>
+                
+                <form action="">
+                  <div id="email"class="form-outline mb-4">
+                    <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
+                    <label class="form-label" for="typeEmailX-2">Email</label>
+                  </div>
+      
+                  <div id="password" class="form-outline mb-4">
+                    <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
+                    <label class="form-label" for="typePasswordX-2">Contraseña</label>
+                  </div>
+                </form>
     
-                <div id="email"class="form-outline mb-4">
-                  <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
-                  <label class="form-label" for="typeEmailX-2">Email</label>
-                </div>
-    
-                <div id="password" class="form-outline mb-4">
-                  <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
-                  <label class="form-label" for="typePasswordX-2">Password</label>
-                </div>
-    
-                <button id="button" class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+                <button id="loginButton" class="btn btn-primary btn-lg btn-block" type="submit">Iniciar sesión</button>
     
                 <hr class="my-4">
     
                 <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
-                  type="submit"><i class="fab fa-google me-2"></i> Sign in with google</button>
+                  type="submit"><i class="fab fa-google me-2"></i> Inicie sesión con Google</button>
     
               </div>
             </div>
@@ -50,6 +54,7 @@
         </div>
       </div>
     </section>
+
   </main>
   <footer class="text-muted">
     <div class="container">

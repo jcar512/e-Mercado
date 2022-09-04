@@ -1,4 +1,13 @@
 document.addEventListener("DOMContentLoaded", function(){
+    /* Si no hay un usuario en el local storage se redirige a login */
+    if (window.localStorage.getItem("nombreUsuario") == null){
+        window.location.href = "login.html";      
+      }
+    /* Mostrar nombre de usuario */
+    usuario = document.getElementById("usuario")
+    usuario.innerHTML = window.localStorage.getItem("nombreUsuario")
+
+
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
         window.location = "products.html"
@@ -11,4 +20,5 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
+
 });

@@ -1,9 +1,21 @@
-.jumbotron,
+body {
+  font-size: 14px;
+  line-height: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 36px;
+}
+
+/* .jumbotron,
 .card-body,
 .container,
 .site-header {
   font-family: "Raleway", serif !important;
-}
+} */
 
 .jumbotron .display-4 {
   font-weight: bold;
@@ -194,14 +206,13 @@ a.custom-card:hover {
   margin-bottom: 40px;
 }
 
-#prod-hr {
-  height: 3px;
-  border-radius: 2px;
-  color: #6c757db9;
+.margin-b-20 {
+  margin-bottom: 20px;
 }
 
-.prod-info-content {
-  margin: 0px;
+#product-cost {
+  font-size: 18px !important;
+  line-height: 24px !important;
 }
 
 #images {
@@ -217,4 +228,26 @@ a.custom-card:hover {
   margin: 10px;
   height: 10rem;
   width: 16rem;
+}
+
+.border-line {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.customer-comment {
+  margin-bottom: 22px;
+}
+
+.profile-name {
+  font-weight: bold;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
+.td-padding-right {
+  padding-right: 6px;
 }

@@ -1,42 +1,61 @@
 const PRODUCT_ID = window.localStorage.getItem("productID");
-const product = document.querySelector("#product");
-let productArray = [];
+const commentsList = document.querySelector("#product-comments");
 
-function showProduct() {
-  product.innerHTML = `
-    <div>
-      <div class="prod-title">
-        <h2>${productArray.name}</h2>
-      </div>
-      <hr id="prod-hr">
-      <div class="prod-info">
-        <p class="prod-info-content"><strong>Precio</strong></p>
-        <p>${productArray.currency} ${productArray.cost}</p>
-      </div>
-      <div class="prod-info">
-        <p class="prod-info-content"><strong>Descripción</strong></p>
-        <p>${productArray.description}</p>
-      </div>
-      <div class="prod-info">
-        <p class="prod-info-content"><strong>Categoría</strong></p>
-        <p>${productArray.category}</p>
-      </div>
-      <div class="prod-info">
-        <p class="prod-info-content"><strong>Cantidad de vendidos</strong></p>
-        <p>${productArray.soldCount}</p>
-      </div>
-      <div>
-        <p class="prod-info-content"><strong>Imágenes ilustrativas</strong></p>
-        <div id="images"><div>
-      </div>
-    </div>
-    `;
-  console.log(productArray.images);
-  for (let image of productArray.images) {
+function showProduct(products) {
+  let name = document.querySelector("#product-name");
+  let cost = document.querySelector("#product-cost");
+  let description = document.querySelector("#product-description");
+  let category = document.querySelector("#product-category");
+  let soldCount = document.querySelector("#product-sold-count");
+
+  name.innerHTML = products.name;
+  cost.innerHTML = products.currency + " " + products.cost;
+  description.innerHTML = products.description;
+  category.innerHTML = products.category;
+  soldCount.innerHTML = products.soldCount;
+
+  for (let image of products.images) {
     document.querySelector("#images").innerHTML += `
     <img src="${image}" class="image">
     `;
   }
+}
+
+function loadComments(comments) {
+  for (let comment of comments) {
+    commentsList.innerHTML += `
+    <div class="customer-comment">
+      <div class="name-and-date">
+        <div class="profile-name">${comment.user}</div>
+        <div class="comment-date">${comment.dateTime}</div>
+      </div>
+      <div class="rating">
+        ${starRating(comment.score)}
+      </div>
+      <div class="comment-description">
+        <p>${comment.description}</p>
+      </div>
+    </div>
+    `;
+  }
+}
+
+function starRating(rate) {
+  htmlToAppend = "";
+
+  for (i = 0; i < 5; i++) {
+    if (i < rate) {
+      htmlToAppend += `
+      <span class="fa fa-star checked"></span>
+      `;
+    } else {
+      htmlToAppend += `
+      <span class="fa fa-star"></span>
+      `;
+    }
+  }
+
+  return htmlToAppend;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -47,10 +66,19 @@ document.addEventListener("DOMContentLoaded", () => {
   usuario = document.getElementById("usuario");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
 
+  //Cargo la información del producto
   getJSONData(PRODUCT_INFO_URL + PRODUCT_ID + EXT_TYPE).then((res) => {
     if (res.status === "ok") {
-      productArray = res.data;
-      showProduct();
+      let productArray = res.data;
+      showProduct(productArray);
+    }
+  });
+
+  //Cargo los comentarios
+  getJSONData(PRODUCT_INFO_COMMENTS_URL + PRODUCT_ID + EXT_TYPE).then((res) => {
+    if (res.status === "ok") {
+      let comments = res.data;
+      loadComments(comments);
     }
   });
 });

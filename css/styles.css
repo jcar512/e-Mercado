@@ -197,6 +197,10 @@ a.custom-card:hover {
   text-decoration: inherit;
 }
 
+.fa-star {
+  color: #c8c9ca;
+}
+
 .checked {
   color: orange;
 }
@@ -250,4 +254,58 @@ a.custom-card:hover {
 
 .td-padding-right {
   padding-right: 6px;
+}
+
+.rating-select {
+  float: left;
+}
+
+.stars input {
+  display: none;
+}
+
+.stars label {
+  padding: 2px;
+  transition: all 0.2s ease;
+  float: right;
+}
+
+.stars input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label {
+  color: orange;
+}
+
+input:checked ~ label {
+  color: orange;
+}
+
+#new-comment {
+  display: inline-block;
+}
+
+#new-comment-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: transparent;
+  line-height: normal;
+  overflow: hidden;
+  padding: 10px;
+  resize: none;
+  width: 100%;
+  max-width: 440px;
+}
+
+button {
+  font-size: 14px;
+  font-weight: 600;
+  width: 90px;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  color: #fffffe;
+  background-color: #3383fa;
+}
+
+button:hover {
+  background-color: #3178e2;
 }

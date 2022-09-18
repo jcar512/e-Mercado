@@ -1,9 +1,21 @@
-.jumbotron,
+body {
+  font-size: 14px;
+  line-height: 20px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 36px;
+}
+
+/* .jumbotron,
 .card-body,
 .container,
 .site-header {
-  font-family: 'Raleway', serif !important;
-}
+  font-family: "Raleway", serif !important;
+} */
 
 .jumbotron .display-4 {
   font-weight: bold;
@@ -32,8 +44,8 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
+  background-color: #53c0fb;
+  background: url("../img/cover_back.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,12 +85,12 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .site-header a {
   color: white;
-  transition: ease-in-out color .15s;
+  transition: ease-in-out color 0.15s;
 }
 
 .site-header .dropdown-menu a {
@@ -86,7 +98,7 @@ footer p {
 }
 
 .dropzone {
-  border: 2px dashed #0087F7;
+  border: 2px dashed #0087f7;
   border-radius: 5px;
   background: white;
 }
@@ -185,6 +197,171 @@ a.custom-card:hover {
   text-decoration: inherit;
 }
 
+.fa-star {
+  color: #c8c9ca;
+}
+
 .checked {
   color: orange;
+}
+
+.column-container {
+  display: flex;
+}
+
+.column-1-left {
+  flex-basis: 100%;
+}
+
+.column-2-right {
+  margin-left: 48px;
+  max-width: 368px;
+  width: 368px;
+  z-index: 1;
+}
+
+.prod-title {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.margin-t-40 {
+  margin: 40px 0 0 0;
+}
+
+#product-cost {
+  font-size: 18px !important;
+  line-height: 24px !important;
+}
+
+.subtitle {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.product-description {
+  font-size: 16px;
+}
+
+#related-products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.related-prod-div {
+  border: solid;
+  border-color: #e2e2e2ce;
+  border-radius: 3px;
+  border-width: 1px;
+  cursor: pointer;
+  margin: 0 10px 0 0;
+}
+
+.related-prod-div:hover {
+  box-shadow: 2px 2px 4px #b3b3b3da;
+}
+
+.related-p {
+  margin: 10px 0 10px 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.image-related {
+  border-top: solid;
+  border-width: 1px;
+  border-color: #e2e2e298;
+  height: 10rem;
+  width: 16rem;
+}
+
+.border-line {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.comments-container {
+  max-width: 500px;
+}
+
+.customer-comment {
+  margin-bottom: 22px;
+}
+
+.comment-description p {
+  height: auto;
+  line-height: 20px;
+  word-wrap: break-word;
+}
+
+.profile-name {
+  font-weight: bold;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
+.td-padding-right {
+  padding-right: 6px;
+}
+
+.rating-select {
+  float: left;
+}
+
+.stars input {
+  display: none;
+}
+
+.stars label {
+  padding: 2px;
+  transition: all 0.2s ease;
+  float: right;
+}
+
+.stars input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label {
+  color: orange;
+  cursor: pointer;
+}
+
+input:checked ~ label {
+  color: orange;
+}
+
+#new-comment {
+  display: inline-block;
+}
+
+#new-comment-text {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: transparent;
+  line-height: normal;
+  overflow: hidden;
+  padding: 10px;
+  resize: none;
+  width: 100%;
+  max-width: 440px;
+}
+
+.submit-bton {
+  border-radius: 4px;
+  border: none;
+  color: #fffffe;
+  background-color: #3383fa;
+}
+
+.btn-text {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 35px;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.submit-bton:hover {
+  background-color: #3178e2;
 }

@@ -7,6 +7,11 @@ let minCount = undefined;
 let maxCount = undefined;
 let initial;
 
+function setProductID(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html";
+}
+
 function showProductList() {
   let htmlContentToAppend = "";
 
@@ -18,7 +23,7 @@ function showProductList() {
         (maxCount != undefined && parseInt(product.cost) <= maxCount))
     ) {
       htmlContentToAppend += `
-              <div onclick="setCatID(${product.id})" class="list-group-item list-group-item-action cursor-active">
+              <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active">
                   <div class="row">
                       <div class="col-3">
                           <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
@@ -95,7 +100,6 @@ function sortAndShowProducts(sortCriteria, categoriesArray) {
   showProductList();
 }
 
-
 // Función que se ejecuta al cargar la página.
 document.addEventListener("DOMContentLoaded", function () {
   if (window.localStorage.getItem("nombreUsuario") == null) {
@@ -105,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
   usuario = document.getElementById("usuario");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
 
-  // Agregué catID 
+  // Agregué catID
   getJSONData(
     PRODUCTS_URL + window.localStorage.getItem("catID") + EXT_TYPE
   ).then((resultado) => {
@@ -117,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
       // Clono lista de productos
       initial = [...currentProductsArray];
-      
+
       showProductList();
     }
   });
@@ -180,4 +184,3 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(e.target.value);
   };
 });
-

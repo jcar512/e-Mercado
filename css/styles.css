@@ -322,12 +322,12 @@ a.custom-card:hover {
 }
 
 .stars input:not(:checked) ~ label:hover,
-input:not(:checked) ~ label:hover ~ label {
+.stars input:not(:checked) ~ label:hover ~ label {
   color: orange;
   cursor: pointer;
 }
 
-input:checked ~ label {
+.stars input:checked ~ label {
   color: orange;
 }
 

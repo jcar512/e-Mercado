@@ -205,13 +205,28 @@ a.custom-card:hover {
   color: orange;
 }
 
+.column-container {
+  display: flex;
+}
+
+.column-1-left {
+  flex-basis: 100%;
+}
+
+.column-2-right {
+  margin-left: 48px;
+  max-width: 368px;
+  width: 368px;
+  z-index: 1;
+}
+
 .prod-title {
   margin-top: 40px;
   margin-bottom: 40px;
 }
 
-.margin-b-20 {
-  margin-bottom: 20px;
+.margin-t-40 {
+  margin: 40px 0 0 0;
 }
 
 #product-cost {
@@ -219,17 +234,43 @@ a.custom-card:hover {
   line-height: 24px !important;
 }
 
-#images {
+.subtitle {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.product-description {
+  font-size: 16px;
+}
+
+#related-products {
   display: flex;
   flex-wrap: wrap;
 }
 
-.image {
+.related-prod-div {
   border: solid;
-  border-color: #e2e2e2bd;
+  border-color: #e2e2e2ce;
   border-radius: 3px;
-  border-width: 2px;
-  margin: 10px;
+  border-width: 1px;
+  cursor: pointer;
+  margin: 0 10px 0 0;
+}
+
+.related-prod-div:hover {
+  box-shadow: 2px 2px 4px #b3b3b3da;
+}
+
+.related-p {
+  margin: 10px 0 10px 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.image-related {
+  border-top: solid;
+  border-width: 1px;
+  border-color: #e2e2e298;
   height: 10rem;
   width: 16rem;
 }
@@ -240,8 +281,18 @@ a.custom-card:hover {
   margin-bottom: 40px;
 }
 
+.comments-container {
+  max-width: 500px;
+}
+
 .customer-comment {
   margin-bottom: 22px;
+}
+
+.comment-description p {
+  height: auto;
+  line-height: 20px;
+  word-wrap: break-word;
 }
 
 .profile-name {
@@ -273,6 +324,7 @@ a.custom-card:hover {
 .stars input:not(:checked) ~ label:hover,
 input:not(:checked) ~ label:hover ~ label {
   color: orange;
+  cursor: pointer;
 }
 
 input:checked ~ label {
@@ -295,17 +347,21 @@ input:checked ~ label {
   max-width: 440px;
 }
 
-button {
-  font-size: 14px;
-  font-weight: 600;
-  width: 90px;
-  height: 35px;
+.submit-bton {
   border-radius: 4px;
   border: none;
   color: #fffffe;
   background-color: #3383fa;
 }
 
-button:hover {
+.btn-text {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 35px;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.submit-bton:hover {
   background-color: #3178e2;
 }

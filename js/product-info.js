@@ -10,6 +10,7 @@ function setProductID(id) {
 }
 
 function showProduct(product) {
+  const indicators = document.querySelector("#carousel-indicators");
   const carousel = document.querySelector("#carousel-inner");
   const name = document.querySelector("#product-name");
   const cost = document.querySelector("#product-cost");
@@ -31,6 +32,11 @@ function showProduct(product) {
     `;
 
   for (let i = 1; i < product.images.length; i++) {
+    indicators.innerHTML += `
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" aria-label="Slide ${
+      i + 1
+    }"></button>
+    `;
     carousel.innerHTML += `
     <div class="carousel-item">
       <img src="${product.images[i]}" class="d-block w-100" alt="...">

@@ -197,6 +197,27 @@ a.custom-card:hover {
   text-decoration: inherit;
 }
 
+.hidden {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translate(-100%);
+  transition: all 1s;
+}
+
+.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: translate(0);
+}
+
+.card-info:nth-child(2) {
+  transition-delay: 100ms;
+}
+
+.card-info:nth-child(3) {
+  transition-delay: 200ms;
+}
+
 .fa-star {
   color: #c8c9ca;
 }
@@ -273,6 +294,22 @@ a.custom-card:hover {
   border-color: #e2e2e298;
   height: 10rem;
   width: 16rem;
+}
+
+@media only screen and (max-width: 768px) {
+  [class*="column-"] {
+    flex-wrap: wrap;
+  }
+  [class*="column-2-right"] {
+    margin: 40px 0 0 0;
+  }
+  [class*="related-prod-div"] {
+    margin: 10px 10px 0 0;
+  }
+  [class*="prod-title"] {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .border-line {

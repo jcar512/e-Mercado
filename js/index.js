@@ -1,24 +1,36 @@
-document.addEventListener("DOMContentLoaded", function(){
-    /* Si no hay un usuario en el local storage se redirige a login */
-    if (window.localStorage.getItem("nombreUsuario") == null){
-        window.location.href = "login.html";      
-      }
-    /* Mostrar nombre de usuario */
-    usuario = document.getElementById("usuario")
-    usuario.innerHTML = window.localStorage.getItem("nombreUsuario")
+const hidden = document.querySelectorAll(".hidden");
 
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+});
 
-    document.getElementById("autos").addEventListener("click", function() {
-        localStorage.setItem("catID", 101);
-        window.location = "products.html"
-    });
-    document.getElementById("juguetes").addEventListener("click", function() {
-        localStorage.setItem("catID", 102);
-        window.location = "products.html"
-    });
-    document.getElementById("muebles").addEventListener("click", function() {
-        localStorage.setItem("catID", 103);
-        window.location = "products.html"
-    });
+document.addEventListener("DOMContentLoaded", function () {
+  /* Si no hay un usuario en el local storage se redirige a login */
+  if (window.localStorage.getItem("nombreUsuario") == null) {
+    window.location.href = "login.html";
+  }
+  /* Mostrar nombre de usuario */
+  usuario = document.getElementById("usuario");
+  usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
 
+  hidden.forEach((el) => {
+    observer.observe(el);
+  });
+
+  document.getElementById("autos").addEventListener("click", function () {
+    localStorage.setItem("catID", 101);
+    window.location = "products.html";
+  });
+  document.getElementById("juguetes").addEventListener("click", function () {
+    localStorage.setItem("catID", 102);
+    window.location = "products.html";
+  });
+  document.getElementById("muebles").addEventListener("click", function () {
+    localStorage.setItem("catID", 103);
+    window.location = "products.html";
+  });
 });

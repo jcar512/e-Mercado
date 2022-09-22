@@ -1,5 +1,15 @@
+:root {
+  --light: #fff;
+  --light-grey: #c8c9ca;
+  --orange: #ffa600;
+  --shadow-color: #b3b3b3da;
+  --border-color: #e2e2e298;
+  --button-color: #3383fa;
+  --button-hover-color: #3178e2;
+}
+
 body {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
   font-family: Arial, sans-serif;
 }
@@ -34,12 +44,6 @@ nav a {
   user-select: none;
 }
 
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
-}
-
 .jumbotron {
   height: 50vh;
   padding: 5em inherit;
@@ -53,13 +57,6 @@ nav a {
   font-weight: bold;
 }
 
-@media (min-width: 768px) {
-  .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-}
-
 .jumbotron p:last-child {
   margin-bottom: 0;
 }
@@ -70,9 +67,9 @@ nav a {
 
 .jumbotron .container {
   max-width: 40rem;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #ffffff80;
   border-radius: 10px;
-  text-shadow: 1px 1px 2px grey;
+  text-shadow: 1px 1px 2px var(--shadow-color);
 }
 
 .jumbotron .lead {
@@ -89,7 +86,7 @@ footer p {
 }
 
 .site-header a {
-  color: white;
+  color: var(--light);
   transition: ease-in-out color 0.15s;
 }
 
@@ -100,7 +97,7 @@ footer p {
 .dropzone {
   border: 2px dashed #0087f7;
   border-radius: 5px;
-  background: white;
+  background: var(--light);
 }
 
 .img-fit {
@@ -141,10 +138,10 @@ footer p {
   width: 51px;
   height: 51px;
   margin: 6px;
-  border: 6px solid #fff;
+  border: 6px solid var(--light);
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border-color: var(--light) transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -219,11 +216,11 @@ a.custom-card:hover {
 }
 
 .fa-star {
-  color: #c8c9ca;
+  color: var(--light-grey);
 }
 
 .checked {
-  color: orange;
+  color: var(--orange);
 }
 
 .column-container {
@@ -271,7 +268,7 @@ a.custom-card:hover {
 
 .related-prod-div {
   border: solid;
-  border-color: #e2e2e2ce;
+  border-color: var(--border-color);
   border-radius: 3px;
   border-width: 1px;
   cursor: pointer;
@@ -279,7 +276,7 @@ a.custom-card:hover {
 }
 
 .related-prod-div:hover {
-  box-shadow: 2px 2px 4px #b3b3b3da;
+  box-shadow: 2px 2px 4px var(--shadow-color);
 }
 
 .related-p {
@@ -291,29 +288,13 @@ a.custom-card:hover {
 .image-related {
   border-top: solid;
   border-width: 1px;
-  border-color: #e2e2e298;
+  border-color: var(--border-color);
   height: 10rem;
   width: 16rem;
 }
 
-@media only screen and (max-width: 768px) {
-  [class*="column-"] {
-    flex-wrap: wrap;
-  }
-  [class*="column-2-right"] {
-    margin: 40px 0 0 0;
-  }
-  [class*="related-prod-div"] {
-    margin: 10px 10px 0 0;
-  }
-  [class*="prod-title"] {
-    display: flex;
-    justify-content: center;
-  }
-}
-
 .border-line {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--border-color);
   margin-top: 40px;
   margin-bottom: 40px;
 }
@@ -360,12 +341,12 @@ a.custom-card:hover {
 
 .stars input:not(:checked) ~ label:hover,
 .stars input:not(:checked) ~ label:hover ~ label {
-  color: orange;
+  color: var(--orange);
   cursor: pointer;
 }
 
 .stars input:checked ~ label {
-  color: orange;
+  color: var(--orange);
 }
 
 #new-comment {
@@ -387,8 +368,8 @@ a.custom-card:hover {
 .submit-bton {
   border-radius: 4px;
   border: none;
-  color: #fffffe;
-  background-color: #3383fa;
+  color: var(--light);
+  background-color: var(--button-color);
 }
 
 .btn-text {
@@ -400,5 +381,34 @@ a.custom-card:hover {
 }
 
 .submit-bton:hover {
-  background-color: #3178e2;
+  background-color: var(--button-hover-color);
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+  .jumbotron {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+  .zoom:hover {
+    transform: scale(1.05);
+    transition: all 0.2s;
+  }
+}
+@media (max-width: 768px) {
+  [class*="column-"] {
+    flex-wrap: wrap;
+  }
+  .column-2-right {
+    margin: 40px 0 0 0;
+  }
+  .related-prod-div {
+    margin: 10px 10px 0 0;
+  }
+  .prod-title {
+    display: flex;
+    justify-content: center;
+  }
 }

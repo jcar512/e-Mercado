@@ -106,11 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "login.html";
   }
 
-  let newCommentArray =
-    JSON.parse(window.localStorage.getItem(PRODUCT_ID)) || [];
+  let newCommentArray = JSON.parse(window.localStorage.getItem(PRODUCT_ID)) || [];
 
-  usuario = document.getElementById("usuario");
+  usuario = document.getElementById("navbarDarkDropdownMenuLink");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
+
+  document.getElementById("log-out-btn").addEventListener("click", () => {
+    localStorage.removeItem("nombreUsuario");
+  });
 
   //Cargo la información del producto
   getJSONData(PRODUCT_INFO_URL + PRODUCT_ID + EXT_TYPE).then((res) => {
@@ -158,9 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
       commentsList.innerHTML += `
         <div class="customer-comment">
           <div class="name-and-date">
-            <div class="profile-name">${window.localStorage.getItem(
-              "nombreUsuario"
-            )}</div>
+            <div class="profile-name">${window.localStorage.getItem("nombreUsuario")}</div>
             <div class="comment-date">${currentDateTime}</div>
           </div>
           <div class="rating">

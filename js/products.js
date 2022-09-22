@@ -21,7 +21,7 @@ function showProductList() {
       (maxCount == undefined || (maxCount != undefined && parseInt(product.cost) <= maxCount))
     ) {
       htmlContentToAppend += `
-              <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active">
+              <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active zoom">
                   <div class="row">
                       <div class="col-3">
                           <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
@@ -101,8 +101,12 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "login.html";
   }
 
-  usuario = document.getElementById("usuario");
+  usuario = document.getElementById("navbarDarkDropdownMenuLink");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
+
+  document.getElementById("log-out-btn").addEventListener("click", () => {
+    localStorage.removeItem("nombreUsuario");
+  });
 
   // Agregué catID
   getJSONData(PRODUCTS_URL + window.localStorage.getItem("catID") + EXT_TYPE).then((resultado) => {

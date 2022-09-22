@@ -63,7 +63,7 @@ function showCategoriesList() {
         (maxCount != undefined && parseInt(category.productCount) <= maxCount))
     ) {
       htmlContentToAppend += `
-            <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active zoom">
+            <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
                         <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
@@ -106,12 +106,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     window.location.href = "login.html";
   }
   /* Mostrar nombre de usuario */
-  usuario = document.getElementById("navbarDarkDropdownMenuLink");
+  usuario = document.getElementById("usuario");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
-
-  document.getElementById("log-out-btn").addEventListener("click", () => {
-    localStorage.removeItem("nombreUsuario");
-  });
 
   getJSONData(CATEGORIES_URL).then(function (resultObj) {
     if (resultObj.status === "ok") {

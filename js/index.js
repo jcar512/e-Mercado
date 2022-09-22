@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "login.html";
   }
   /* Mostrar nombre de usuario */
-  usuario = document.getElementById("navbarDarkDropdownMenuLink");
+  usuario = document.getElementById("usuario");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
 
   hidden.forEach((el) => {
@@ -32,9 +32,5 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("muebles").addEventListener("click", function () {
     localStorage.setItem("catID", 103);
     window.location = "products.html";
-  });
-
-  document.getElementById("log-out-btn").addEventListener("click", () => {
-    localStorage.removeItem("nombreUsuario");
   });
 });

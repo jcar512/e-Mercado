@@ -31,6 +31,10 @@ h1 {
   font-weight: bold;
 }
 
+.nav-margin {
+  margin-right: 2rem;
+}
+
 nav a {
   text-decoration: none;
 }

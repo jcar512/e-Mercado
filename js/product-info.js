@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     JSON.parse(
       window.localStorage.getItem("cart" + window.localStorage.getItem("nombreUsuario"))
     ) || [];
+
   let newCartItem;
 
   let newCommentArray = JSON.parse(window.localStorage.getItem(PRODUCT_ID)) || [];

@@ -1,6 +1,7 @@
 const PRODUCT_ID = window.localStorage.getItem("productID");
 const commentsList = document.querySelector("#product-comments");
 const submitBtn = document.querySelector("#review-submit");
+const addToCartBtn = document.querySelector("#addToCartBtn");
 const newCommentText = document.querySelector("#new-comment-text");
 let selectedStar;
 
@@ -106,6 +107,12 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "login.html";
   }
 
+  let cart =
+    JSON.parse(
+      window.localStorage.getItem("cart" + window.localStorage.getItem("nombreUsuario"))
+    ) || [];
+  let newCartItem;
+
   let newCommentArray = JSON.parse(window.localStorage.getItem(PRODUCT_ID)) || [];
 
   usuario = document.getElementById("navbarDarkDropdownMenuLink");
@@ -119,9 +126,35 @@ document.addEventListener("DOMContentLoaded", () => {
   getJSONData(PRODUCT_INFO_URL + PRODUCT_ID + EXT_TYPE).then((res) => {
     if (res.status === "ok") {
       let product = res.data;
+      newCartItem = {
+        id: product.id,
+        name: product.name,
+        count: 1,
+        unitCost: product.cost,
+        currency: product.currency,
+        image: product.images[0],
+      };
       showProduct(product);
     }
   });
+
+  addToCartBtn.onclick = () => {
+    const product = cart.find((product) => {
+      return product.id === +PRODUCT_ID;
+    });
+
+    if (product === undefined) {
+      cart.push(newCartItem);
+    } else {
+      product.count += 1;
+    }
+
+    window.localStorage.setItem(
+      "cart" + window.localStorage.getItem("nombreUsuario"),
+      JSON.stringify(cart)
+    );
+    window.location = "cart.html";
+  };
 
   //Cargo los comentarios
   getJSONData(PRODUCT_INFO_COMMENTS_URL + PRODUCT_ID + EXT_TYPE).then((res) => {

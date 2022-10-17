@@ -21,7 +21,7 @@ function showProductList() {
       (maxCount == undefined || (maxCount != undefined && parseInt(product.cost) <= maxCount))
     ) {
       htmlContentToAppend += `
-              <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active zoom">
+              <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active">
                   <div class="row">
                       <div class="col-3">
                           <img src="${product.image}" alt="${product.description}" class="img-thumbnail">

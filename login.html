@@ -1,73 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>eMercado - Todo lo que busques está aquí</title>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
-  
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: rgb(248, 249, 250);
-    }
-  </style>
-</head>
+    <link href="http://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      body {
+        background-color: rgb(248, 249, 250);
+      }
+    </style>
+  </head>
 
-<body>
-  <main class="mt-5">
+  <body>
+    <main class="mt-5">
+      <!--Login-->
+      <section class="vh-100">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card shadow-2-strong" style="border-radius: 1rem">
+                <div class="card-body p-5 text-center">
+                  <h3 class="mb-5">Inicio de sesión</h3>
 
-    <!--Login-->
-    <section class="vh-100" >
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-            <div class="card shadow-2-strong" style="border-radius: 1rem;">
-              <div class="card-body p-5 text-center">
-    
-                <h3 class="mb-5">Inicio de sesión</h3>
-                
-                <form action="" method="post">
-                  <div id="email"class="form-outline mb-4">
-                    <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
-                    <label class="form-label" for="typeEmailX-2">Email</label>
-                  </div>
-      
-                  <div id="password" class="form-outline mb-4">
-                    <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
-                    <label class="form-label" for="typePasswordX-2">Contraseña</label>
-                  </div>
-                  
-                </form>  
-                
-                <button id="loginButton" class="btn btn-primary btn-lg btn-block" type="submit">Iniciar sesión</button>
+                  <form action="" method="post">
+                    <div id="email" class="form-outline mb-4">
+                      <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
+                      <label class="form-label" for="typeEmailX-2">Email</label>
+                    </div>
 
-                <hr class="my-4">
-    
-                <button class="btn btn-lg btn-block btn-primary" style="background-color: #dd4b39;"
-                  type="submit"><i class="fab fa-google me-2"></i> Inicie sesión con Google</button>
-    
+                    <div id="password" class="form-outline mb-4">
+                      <input
+                        type="password"
+                        id="typePasswordX-2"
+                        class="form-control form-control-lg"
+                      />
+                      <label class="form-label" for="typePasswordX-2">Contraseña</label>
+                    </div>
+                  </form>
+
+                  <button id="loginButton" class="btn btn-primary btn-lg btn-block" type="submit">
+                    Iniciar sesión
+                  </button>
+
+                  <hr class="my-4" />
+
+                  <button
+                    class="btn btn-lg btn-block btn-primary"
+                    style="background-color: #dd4b39"
+                    type="submit"
+                  >
+                    <i class="fab fa-google me-2"></i> Inicie sesión con Google
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </section>
+    </main>
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-end">
+          <a href="#">Volver arriba</a>
+        </p>
+        <p>
+          Este sitio forma parte de
+          <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> - 2022
+        </p>
+        <p>
+          Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del
+          obligatorio.
+        </p>
       </div>
-    </section>
-
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
-        2022</p>
-      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
-    </div>
-  </footer>
-  <script src="js/login.js"></script>
-</body>
-
+    </footer>
+    <script src="js/login.js"></script>
+  </body>
 </html>

@@ -548,6 +548,15 @@ input.qty {
   text-align: center;
 }
 
+.card__brand {
+  display: flex;
+  align-items: flex-end;
+  font-size: 3rem;
+  color: var(--darker-blue);
+  min-width: 100px;
+  min-height: 75px;
+}
+
 @media (max-width: 991px) {
   .info-adress-container {
     flex-direction: column;

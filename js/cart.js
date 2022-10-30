@@ -29,6 +29,48 @@ closeBtn.onclick = function () {
   modal.style.display = "none";
 };
 
+const cleaveStreetNum = new Cleave("#streetNum", {
+  numericOnly: true,
+  blocks: [4],
+});
+
+const cleaveCC = new Cleave("#card-num", {
+  creditCard: true,
+  delimiter: "-",
+  onCreditCardTypeChanged: function (type) {
+    const cardBrand = document.getElementById("cardBrand"),
+      visa = "fab fa-cc-visa",
+      mastercard = "fab fa-cc-mastercard";
+
+    switch (type) {
+      case "visa":
+        cardBrand.setAttribute("class", visa);
+        break;
+      case "mastercard":
+        cardBrand.setAttribute("class", mastercard);
+        break;
+      default:
+        cardBrand.setAttribute("class", "");
+        break;
+    }
+  },
+});
+
+const cleaveDate = new Cleave("#card-expiration", {
+  date: true,
+  datePattern: ["m", "y"],
+});
+
+const cleaveCCV = new Cleave("#card-seg-code", {
+  numericOnly: true,
+  blocks: [3],
+});
+
+const cleaveBankAcc = new Cleave("#bank-acc", {
+  numericOnly: true,
+  blocks: [17],
+});
+
 document.querySelector("#payment-method").onclick = (e) => {
   if (+e.target.value === 1) {
     document.querySelector("#payment-method-selected").innerText = "Tarjeta de crédito";
@@ -82,6 +124,7 @@ document.querySelector("#payment-method").onclick = (e) => {
     cardNum.value = "";
     cardSegCode.value = "";
     cardExpiration.value = "";
+    cardBrand.setAttribute("class", "");
   }
 };
 

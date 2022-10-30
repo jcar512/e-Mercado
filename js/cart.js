@@ -2,9 +2,200 @@ const URL = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 const cartList = document.querySelector("#info-container");
 const items = document.querySelector("#items");
 const subtotalAll = document.querySelector("#subtotal-all");
+const totalToPay = document.querySelector("#total-amount");
+const tax = document.querySelector("#shipping-tax");
 let cartArray = [];
+let shippingTax = 0.05;
+let totalPrice;
+
+//Modal
+const modal = document.getElementById("myModal");
+const btn = document.getElementById("myBtn");
+const closeBtn = document.querySelector("#close-btn");
+const cardNum = document.querySelector("#card-num");
+const cardSegCode = document.querySelector("#card-seg-code");
+const cardExpiration = document.querySelector("#card-expiration");
+const bankAcc = document.querySelector("#bank-acc");
+const form = document.querySelector("#form");
+
+// When the user clicks on the button, open the modal
+btn.onclick = function (e) {
+  e.preventDefault();
+  modal.style.display = "block";
+};
+
+// When the user clicks on closeBtn, close the modal
+closeBtn.onclick = function () {
+  modal.style.display = "none";
+};
+
+document.querySelector("#payment-method").onclick = (e) => {
+  if (+e.target.value === 1) {
+    document.querySelector("#payment-method-selected").innerText = "Tarjeta de crédito";
+
+    document.querySelector("#card-div").style.display = "flex";
+    document.querySelector("#bank-acc-div").style.display = "none";
+
+    //Remuevo el disabled de los input de tarjeta en caso de que lo haya
+    cardNum.removeAttribute("disabled");
+    cardSegCode.removeAttribute("disabled");
+    cardExpiration.removeAttribute("disabled");
+
+    //Añado required a los inputs de tarjeta
+    cardNum.setAttribute("required", "");
+    cardSegCode.setAttribute("required", "");
+    cardExpiration.setAttribute("required", "");
+
+    //Remuevo el required del input de cuenta bancaria
+    bankAcc.removeAttribute("required");
+
+    //Deshabilito el input de cuenta bancaria
+    bankAcc.setAttribute("disabled", "");
+
+    //Dejo el input de cuenta bancaria en blanco
+    bankAcc.value = "";
+  }
+
+  if (+e.target.value === 2) {
+    document.querySelector("#payment-method-selected").innerText = "Transferencia bancaria";
+
+    document.querySelector("#card-div").style.display = "none";
+    document.querySelector("#bank-acc-div").style.display = "flex";
+
+    //Remuevo el disabled del input de cuenta bancaria en caso de que lo haya
+    bankAcc.removeAttribute("disabled");
+
+    //Añado required al input de cuenta bancaria
+    bankAcc.setAttribute("required", "");
+
+    //Remuevo el required de los input de tarjeta
+    cardNum.removeAttribute("required");
+    cardSegCode.removeAttribute("required");
+    cardExpiration.removeAttribute("required");
+
+    //Deshabilito los inputs de tarjeta
+    cardNum.setAttribute("disabled", "");
+    cardSegCode.setAttribute("disabled", "");
+    cardExpiration.setAttribute("disabled", "");
+
+    //Dejo los inputs de tarjeta en blanco
+    cardNum.value = "";
+    cardSegCode.value = "";
+    cardExpiration.value = "";
+  }
+};
+
+function setError(element, message) {
+  const inputControl = element.parentElement;
+  const errorDisplay = inputControl.querySelector(".error");
+
+  element.classList.remove("is-valid");
+  element.classList.add("is-invalid");
+  errorDisplay.innerText = message;
+}
+
+function setSuccess(element) {
+  const inputControl = element.parentElement;
+  const errorDisplay = inputControl.querySelector(".error");
+
+  element.classList.remove("is-invalid");
+  element.classList.add("is-valid");
+  errorDisplay.innerText = "";
+}
+
+function validate({ street, streetNum, streetCorner }) {
+  const errors = {};
+
+  if (street === "") {
+    errors.street = "Debe ingresar la calle.";
+  } else {
+    setSuccess(document.getElementById("street"));
+  }
+
+  if (streetNum === "") {
+    errors.streetNum = "Debe ingresar el número.";
+  } else {
+    setSuccess(document.getElementById("streetNum"));
+  }
+
+  if (streetCorner === "") {
+    errors.streetCorner = "Debe ingresar la esquina.";
+  } else {
+    setSuccess(document.getElementById("streetCorner"));
+  }
+  return errors;
+}
+
+function showErrors(errors) {
+  Object.entries(errors).forEach(([input, error]) =>
+    setError(document.getElementById(input), error)
+  );
+}
+
+document.querySelector("#closebtn").onclick = () => {
+  let div = document.querySelector("#closebtn").parentElement;
+  div.style.opacity = "0";
+  setTimeout(function () {
+    div.style.display = "none";
+  }, 600);
+};
+
+form.onsubmit = (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const values = {
+    street: formData.get("street"),
+    streetNum: formData.get("streetNum"),
+    streetCorner: formData.get("streetCorner"),
+  };
+
+  const errors = validate(values);
+
+  if (Object.keys(errors).length > 0) {
+    showErrors(errors);
+  }
+
+  if (!document.getElementById("modal-form").checkValidity()) {
+    setError(btn.parentElement, "Debe ingresar una forma de pago correcta");
+  } else {
+    setSuccess(btn.parentElement, "Debe ingresar una forma de pago correcta");
+  }
+
+  if (
+    document.getElementById("form").checkValidity() &&
+    document.getElementById("modal-form").checkValidity()
+  ) {
+    // mando datos al servidor
+    document.querySelector("#alert").style.display = "block";
+    setTimeout(function () {
+      document.querySelector("#alert").classList.add("show");
+    }, 30);
+
+    cartArray = [];
+    window.localStorage.setItem(
+      "cart" + window.localStorage.getItem("nombreUsuario"),
+      JSON.stringify(cartArray)
+    );
+    showCart(cartArray);
+  }
+};
+
+function noItems() {
+  document.querySelector("main").innerHTML = `
+    <div class="placeholder">
+      <h1>Tu carrito está vacío</h1>
+      <p>¿No sabes qué comprar? <a href="categories.html">¡Cientos de productos te esperan!</a></p>
+    </div>
+    `;
+}
 
 function showCart(array) {
+  if (array.length === 0) {
+    noItems();
+    return;
+  }
+
   htmlToAppend = "";
   itemsNumToAppend = 0;
   subtotalAllToAppend = 0;
@@ -92,8 +283,10 @@ function showCart(array) {
 
   cartList.innerHTML = htmlToAppend;
   items.innerHTML = itemsNumToAppend;
-  subtotalAll.value = subtotalAllToAppend;
-  subtotalAll.innerHTML = subtotalAllToAppend;
+  totalPrice = subtotalAllToAppend;
+  subtotalAll.innerHTML = totalPrice;
+  tax.innerHTML = Math.round(totalPrice * shippingTax);
+  totalToPay.innerHTML = totalPrice + Math.round(totalPrice * shippingTax);
 }
 
 function subtractOne(id) {
@@ -154,6 +347,15 @@ function removeItemAt(index) {
   showCart(cartArray);
 }
 
+//Radio envíos
+document.querySelector("#shipping-type").onclick = (e) => {
+  if (e.target.value) {
+    shippingTax = e.target.value;
+    tax.innerHTML = Math.round(totalPrice * shippingTax);
+    totalToPay.innerHTML = totalPrice + Math.round(totalPrice * shippingTax);
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   if (window.localStorage.getItem("nombreUsuario") == null) {
     window.location.href = "login.html";
@@ -171,31 +373,5 @@ document.addEventListener("DOMContentLoaded", () => {
       window.localStorage.getItem("cart" + window.localStorage.getItem("nombreUsuario"))
     ) || [];
 
-  getJSONData(URL).then(function (resultObj) {
-    if (resultObj.status === "ok") {
-      let car = resultObj.data.articles[0];
-
-      const product = cartArray.find((product) => {
-        return product.id === car.id;
-      });
-
-      if (product === undefined) {
-        cartArray.push(car);
-      }
-
-      showCart(cartArray);
-    }
-  });
-
-  document.querySelector("#premium").onclick = () => {
-    subtotalAll.innerHTML = subtotalAll.value + Math.round(subtotalAll.value * 0.15);
-  };
-
-  document.querySelector("#express").onclick = () => {
-    subtotalAll.innerHTML = subtotalAll.value + Math.round(subtotalAll.value * 0.07);
-  };
-
-  document.querySelector("#standard").onclick = () => {
-    subtotalAll.innerHTML = subtotalAll.value + Math.round(subtotalAll.value * 0.05);
-  };
+  showCart(cartArray);
 });

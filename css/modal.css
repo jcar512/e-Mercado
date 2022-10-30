@@ -1,0 +1,82 @@
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+.modal-containerr {
+  overflow: hidden;
+}
+
+/* Modal Content/Box */
+.modal-contentt {
+  border-radius: 5px;
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  width: 13px;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.radio-inp {
+  margin: 20px 0 0 0;
+}
+
+.card-data {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-data div {
+  margin-right: 20px;
+}
+
+.myBtn {
+  position: relative;
+  border: none;
+  border-radius: 5px;
+  background: rgb(0, 119, 255);
+  color: whitesmoke;
+  width: 70px;
+  height: 40px;
+  float: right;
+}
+
+.myBtn:hover {
+  background: rgb(0, 93, 199);
+  cursor: pointer;
+}
+
+.modal-inpt {
+  height: 35px;
+  border: solid;
+  border-radius: 4px;
+  border-width: 1px;
+  border-color: rgb(199, 199, 199);
+}
+.read-only {
+  background: rgba(219, 219, 219, 0.678);
+}

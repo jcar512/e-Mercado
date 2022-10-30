@@ -12,7 +12,7 @@ body {
   background: #f2f2f1;
   font-size: 16px;
   line-height: 20px;
-  font-family: Arial, sans-serif;
+  font-family: "Amazon Ember", sans-serif;
 }
 
 h1 {
@@ -34,6 +34,10 @@ h1 {
 
 .nav-margin {
   margin-right: 2rem;
+}
+
+.bg-bluish {
+  background-color: #232f3e;
 }
 
 nav a {
@@ -379,6 +383,11 @@ a.custom-card:hover {
   background-color: var(--blue);
 }
 
+.confirm-payment {
+  height: 40px;
+  width: 100%;
+}
+
 .delete-bton {
   width: 31px;
   height: 31px;
@@ -398,6 +407,7 @@ a.custom-card:hover {
 .btn-text {
   font-size: 14px;
   font-weight: 600;
+  font-family: sans-serif;
   line-height: 35px;
   padding: 0 15px;
   text-align: center;
@@ -405,13 +415,6 @@ a.custom-card:hover {
 
 .submit-bton:hover {
   background-color: var(--darker-blue);
-}
-
-.cart-content {
-  border-radius: 8px;
-  padding: 30px;
-  background: var(--light);
-  margin-top: 1.5rem !important;
 }
 
 .item_image_product {
@@ -493,7 +496,7 @@ input.qty {
 .btn-update {
   font: 18px Arial, Helvetica, sans-serif;
   vertical-align: middle;
-  color: var(--light-grey);
+  color: var(--licontainerght-grey);
 }
 
 .item_cart_qty {
@@ -513,16 +516,18 @@ input.qty {
 }
 
 .info-container {
-  width: 70%;
+  width: 65%;
   padding-right: 20px;
 }
 
-.subtotal-adress {
-  width: 30%;
-  max-height: 450px;
+.cart-content {
+  border-radius: 8px;
+  padding: 30px;
+  background: var(--light);
+  margin-top: 1.5rem !important;
 }
 
-.subtotal-adress h1 {
+.cart-content h1 {
   font-size: 24px;
 }
 
@@ -534,6 +539,15 @@ input.qty {
   border-radius: 4px;
 }
 
+*:disabled {
+  background-color: var(--light-grey);
+}
+
+.placeholder {
+  margin-top: 5%;
+  text-align: center;
+}
+
 @media (max-width: 991px) {
   .info-adress-container {
     flex-direction: column;
@@ -542,10 +556,6 @@ input.qty {
   .info-container {
     width: 100%;
     padding: 0;
-  }
-
-  .subtotal-adress {
-    width: 100%;
   }
 }
 
@@ -593,10 +603,6 @@ input.qty {
     padding: 0;
   }
 
-  .subtotal-adress {
-    width: 100%;
-  }
-
   .item_container .img {
     margin-right: 0 !important;
   }
@@ -614,10 +620,6 @@ input.qty {
   .item_cart_qty {
     justify-content: center;
     margin-bottom: 8px;
-  }
-
-  .item_price {
-    margin: 0 auto;
   }
 
   .item_operations {

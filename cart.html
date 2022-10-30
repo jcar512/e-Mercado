@@ -4,70 +4,78 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>eMercado - Todo lo que busques está aquí</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
-      rel="stylesheet"
-    />
+    <link href="http://fonts.cdnfonts.com/css/amazon-ember" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"
     />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/popup.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/modal.css" rel="stylesheet" />
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDarkDropdown"
-          aria-controls="navbarNavDarkDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-          <ul class="navbar-nav w-100">
-            <li class="nav-item nav-margin">
-              <a class="nav-link" href="index.html">Inicio</a>
-            </li>
-            <li class="nav-item nav-margin">
-              <a class="nav-link" href="categories.html">Categorías</a>
-            </li>
-            <li class="nav-item nav-margin">
-              <a class="nav-link" href="sell.html">Vender</a>
-            </li>
-          </ul>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-bluish">
+        <div class="container">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDarkDropdown"
+            aria-controls="navbarNavDarkDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav w-100">
+              <li class="nav-item nav-margin">
+                <a class="nav-link" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item nav-margin">
+                <a class="nav-link" href="categories.html">Categorías</a>
+              </li>
+              <li class="nav-item nav-margin">
+                <a class="nav-link" href="sell.html">Vender</a>
+              </li>
+            </ul>
 
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle text-white"
-                href="#"
-                id="navbarDarkDropdownMenuLink"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-              </a>
-              <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-                <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" id="log-out-btn" href="login.html">Cerrar sesión</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle text-white"
+                  href="#"
+                  id="navbarDarkDropdownMenuLink"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu"
+                  aria-labelledby="navbarDarkDropdownMenuLink"
+                >
+                  <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                  <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" id="log-out-btn" href="login.html">Cerrar sesión</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
+      <div class="success-alert hidden" id="alert">
+        <span class="closebtn" id="closebtn">&times;</span>
+        ¡Su compra se ha realizado con éxito!
       </div>
-    </nav>
+    </header>
 
     <main>
       <div class="container mt-5">
@@ -79,34 +87,160 @@
           <div class="info-container" id="info-container">
             <!-- Cada item del carrito -->
           </div>
-          <div class="subtotal-adress cart-content">
-            <form>
-              <h1>Tipo de envío</h1>
-              <div class="shipping-type">
-                <input type="radio" name="shipping-option" id="premium" />
-                <label for="premium">Premium 2 a 5 días (15%)</label><br />
-                <input type="radio" name="shipping-option" id="express" />
-                <label for="express">Express 5 a 8 días (7%)</label><br />
-                <input type="radio" name="shipping-option" id="standard" />
-                <label for="standard">Standard 12 a 15 días (5%)</label>
-              </div>
-              <h1 class="mt-2">Dirección de envío</h1>
-              <div class="adress">
-                <p class="mb-1">Calle</p>
-                <input class="border" type="text" />
-                <p class="mb-1 mt-2">Número</p>
-                <input class="border" type="text" />
-                <p class="mb-1 mt-2">Esquina</p>
-                <input class="border" type="text" />
-              </div>
-              <div class="subtotal d-flex align-items-center justify-content-between">
-                <h1 class="mt-2">Subtotal</h1>
-                <div class="item_price">
-                  <span>USD </span
-                  ><span class="cart-price" id="subtotal-all" value=""> 15200 </span>
+          <div class="right-col">
+            <div class="cart-content">
+              <form id="form" novalidate>
+                <h1>Tipo de envío</h1>
+                <div class="shipping-type" id="shipping-type">
+                  <input type="radio" name="shipping-option" id="premium" value="0.15" required />
+                  <label for="premium">Premium 2 a 5 días (15%)</label><br />
+                  <input type="radio" name="shipping-option" id="express" value="0.07" required />
+                  <label for="express">Express 5 a 8 días (7%)</label><br />
+                  <input
+                    type="radio"
+                    name="shipping-option"
+                    id="standard"
+                    value="0.05"
+                    required
+                    checked
+                  />
+                  <label for="standard">Standard 12 a 15 días (5%)</label>
+                </div>
+                <h1 class="mt-2">Dirección de envío</h1>
+                <div class="adress">
+                  <div class="street">
+                    <p class="mb-1">Calle</p>
+                    <input class="form-control" type="text" id="street" name="street" required />
+                    <div class="error invalid-feedback"></div>
+                  </div>
+
+                  <div class="street-num">
+                    <p class="mb-1 mt-2">Número</p>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="streetNum"
+                      name="streetNum"
+                      required
+                    />
+                    <div class="error invalid-feedback"></div>
+                  </div>
+
+                  <div class="street-corner">
+                    <p class="mb-1 mt-2">Esquina</p>
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="streetCorner"
+                      name="streetCorner"
+                      required
+                    />
+                    <div class="error invalid-feedback"></div>
+                  </div>
+                </div>
+                <div class="subtotal">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="mt-2">Subtotal</h5>
+                    <div class="item_price">
+                      <span>USD </span><span class="cart-price" id="subtotal-all"></span>
+                    </div>
+                  </div>
+
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="">Envío</h5>
+                    <div class="item_price">
+                      <span>USD </span><span class="cart-price" id="shipping-tax"></span>
+                    </div>
+                  </div>
+
+                  <div class="d-flex align-items-center justify-content-between">
+                    <h1 class="">Total</h1>
+                    <div class="item_price">
+                      <span>USD </span><span class="cart-price" id="total-amount"></span>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+                <div class="pay-method">
+                  <h1>Forma de pago</h1>
+                  <div>
+                    <div class="choose-payment d-flex align-items-center">
+                      <span class="pe-2" id="payment-method-selected">No ha seleccionado</span>
+                      <button class="btn btn-link ps-0" id="myBtn">Seleccionar</button>
+                    </div>
+                    <div class="error invalid-feedback"></div>
+                  </div>
+                </div>
+                <button type="submit" class="submit-bton confirm-payment mt-2">
+                  Finalizar compra
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Modal -->
+      <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-contentt">
+          <div class="modal-containerr">
+            <h1>Forma de pago</h1>
+            <hr />
+            <form id="modal-form" novalidate>
+              <div class="payment-method" id="payment-method">
+                <div class="credit-card-info">
+                  <div class="radio-input">
+                    <input
+                      type="radio"
+                      name="pay-method"
+                      class="radio-inp"
+                      id="card-radio"
+                      value="1"
+                    />
+                    <label for="card-radio">Tarjeta de crédito</label>
+                  </div>
+                  <hr />
+
+                  <div class="card-data" id="card-div" style="display: none">
+                    <div class="card-num">
+                      <p>Número de tarjeta</p>
+                      <input class="modal-inpt" type="text" id="card-num" required />
+                    </div>
+                    <div class="card-seg-code">
+                      <p>Código de seg.</p>
+                      <input class="modal-inpt" type="text" id="card-seg-code" required />
+                    </div>
+                    <div class="card-expiration">
+                      <p>Vencimiento (MM/AA)</p>
+                      <input class="modal-inpt" type="text" id="card-expiration" required />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bank-info">
+                  <div class="radio-input">
+                    <input
+                      type="radio"
+                      name="pay-method"
+                      class="radio-inp"
+                      id="bank-acc-radio"
+                      value="2"
+                    />
+                    <label for="bank-acc-radio">Transferencia bancaria</label>
+                  </div>
+                  <hr />
+
+                  <div class="bank-acc" id="bank-acc-div" style="display: none">
+                    <div class="">
+                      <p>Número de cuenta</p>
+                      <input class="modal-inpt" type="text" id="bank-acc" required />
+                    </div>
+                  </div>
                 </div>
               </div>
             </form>
+            <button class="myBtn" id="close-btn">Cerrar</button>
           </div>
         </div>
       </div>

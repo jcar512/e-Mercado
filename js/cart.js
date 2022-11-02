@@ -202,7 +202,7 @@ form.onsubmit = (e) => {
   if (!document.getElementById("modal-form").checkValidity()) {
     setError(btn.parentElement, "Debe ingresar una forma de pago correcta");
   } else {
-    setSuccess(btn.parentElement, "Debe ingresar una forma de pago correcta");
+    setSuccess(btn.parentElement);
   }
 
   if (
@@ -380,6 +380,7 @@ function setQty(id) {
   }
 }
 
+//Desafío
 function removeItemAt(index) {
   const newArray = [...cartArray.slice(0, index), ...cartArray.slice(index + 1, cartArray.length)];
   cartArray = newArray;
@@ -390,7 +391,7 @@ function removeItemAt(index) {
   showCart(cartArray);
 }
 
-//Radio envíos
+//Radios envío
 document.querySelector("#shipping-type").onclick = (e) => {
   if (e.target.value) {
     shippingTax = e.target.value;

@@ -21,24 +21,27 @@ function showProductList() {
       (maxCount == undefined || (maxCount != undefined && parseInt(product.cost) <= maxCount))
     ) {
       htmlContentToAppend += `
-              <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active">
-                  <div class="row">
-                      <div class="col-3">
-                          <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
-                      </div>
-                      <div class="col">
-                          <div class="d-flex w-100 justify-content-between">
-                              <h4 class="mb-1">${product.name} - ${product.currency} ${product.cost} </h4>
-                              <small class="text-muted">${product.soldCount} vendidos</small>
-                          </div>
-                          <p class="mb-1">${product.description}</p>
-                      </div>
-                  </div>
-              </div>
-          `;
+        <div class="products" onclick="setProductID(${product.id})">
+          <div class="product-img-div">
+            <img class="product-img" src="${product.image}" alt="${product.description}">
+          </div>
+          <div class="product-name">
+            <h4>${product.name}</h4>          
+          </div>
+          <div class="product-qty">
+            <span class="text-muted">${product.soldCount} vendidos</span>
+          </div>
+          <div class="product-card-description">
+            <p class="product-description">${product.description}</p>
+          </div>
+          <div class="product-price">
+            <h4>${product.currency} ${product.cost}</h4>
+          </div>          
+        </div>
+      `;
     }
   }
-  document.getElementById("productList").innerHTML = htmlContentToAppend;
+  document.querySelector("#productList").innerHTML = htmlContentToAppend;
 }
 
 function sortCategories(criteria, array) {
@@ -91,9 +94,51 @@ function sortAndShowProducts(sortCriteria, categoriesArray) {
 
   currentProductsArray = sortCategories(currentSortCriteria, currentProductsArray);
 
-  //Muestro las categorías ordenadas
+  //Muestro los productos ordenados
   showProductList();
 }
+
+//Botones de filtro
+document.querySelector("#sortAsc").onclick = () => {
+  sortAndShowProducts(ORDER_ASC_BY_COST);
+};
+
+document.querySelector("#sortDesc").onclick = () => {
+  sortAndShowProducts(ORDER_DESC_BY_COST);
+};
+
+document.querySelector("#sortBySold").onclick = () => {
+  sortAndShowProducts(ORDER_BY_SOLD_COUNT);
+};
+
+document.querySelector("#clearRangeFilter").onclick = () => {
+  document.querySelector("#rangeFilterCountMin").value = "";
+  document.querySelector("#rangeFilterCountMax").value = "";
+
+  minCount = undefined;
+  maxCount = undefined;
+
+  showProductList();
+};
+
+document.querySelector("#rangeFilterCount").onclick = () => {
+  minCount = document.querySelector("#rangeFilterCountMin").value;
+  maxCount = document.querySelector("#rangeFilterCountMax").value;
+
+  if (minCount != undefined && minCount != "" && parseInt(minCount) >= 0) {
+    minCount = parseInt(minCount);
+  } else {
+    minCount = undefined;
+  }
+
+  if (maxCount != undefined && maxCount != "" && parseInt(maxCount) >= 0) {
+    maxCount = parseInt(maxCount);
+  } else {
+    maxCount = undefined;
+  }
+
+  showProductList();
+};
 
 // Función que se ejecuta al cargar la página.
 document.addEventListener("DOMContentLoaded", function () {
@@ -101,19 +146,19 @@ document.addEventListener("DOMContentLoaded", function () {
     window.location.href = "login.html";
   }
 
-  usuario = document.getElementById("navbarDarkDropdownMenuLink");
+  usuario = document.querySelector("#navbarDarkDropdownMenuLink");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
 
-  document.getElementById("log-out-btn").addEventListener("click", () => {
+  document.querySelector("#log-out-btn").onclick = () => {
     localStorage.removeItem("nombreUsuario");
-  });
+  };
 
   // Agregué catID
   getJSONData(PRODUCTS_URL + window.localStorage.getItem("catID") + EXT_TYPE).then((resultado) => {
     if (resultado.status === "ok") {
       nombreCategoria = resultado.data.catName;
       currentProductsArray = resultado.data.products;
-      document.getElementById("nombreProducto").innerHTML = `
+      document.querySelector("#nombreProducto").innerHTML = `
             Verás aquí todos los productos de la categoría <strong>${nombreCategoria}</strong></p>
             `;
       // Clono lista de productos
@@ -123,54 +168,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  document.getElementById("sortAsc").addEventListener("click", function () {
-    sortAndShowProducts(ORDER_ASC_BY_COST);
-  });
-
-  document.getElementById("sortDesc").addEventListener("click", function () {
-    sortAndShowProducts(ORDER_DESC_BY_COST);
-  });
-
-  document.getElementById("sortBySold").addEventListener("click", function () {
-    sortAndShowProducts(ORDER_BY_SOLD_COUNT);
-  });
-
-  document.getElementById("clearRangeFilter").addEventListener("click", function () {
-    document.getElementById("rangeFilterCountMin").value = "";
-    document.getElementById("rangeFilterCountMax").value = "";
-
-    minCount = undefined;
-    maxCount = undefined;
-
-    showProductList();
-  });
-
-  document.getElementById("rangeFilterCount").addEventListener("click", function () {
-    minCount = document.getElementById("rangeFilterCountMin").value;
-    maxCount = document.getElementById("rangeFilterCountMax").value;
-
-    if (minCount != undefined && minCount != "" && parseInt(minCount) >= 0) {
-      minCount = parseInt(minCount);
-    } else {
-      minCount = undefined;
-    }
-
-    if (maxCount != undefined && maxCount != "" && parseInt(maxCount) >= 0) {
-      maxCount = parseInt(maxCount);
-    } else {
-      maxCount = undefined;
-    }
-
-    showProductList();
-  });
-
   // Buscador
-  let searchBar = document.getElementById("nav-search");
+  const searchBar = document.querySelector("#nav-search");
   searchBar.onkeyup = (e) => {
     currentProductsArray = initial.filter((product) => {
       return (
-        product.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
-        product.description.toLowerCase().includes(e.target.value.toLowerCase())
+        product.name.toLowerCase().includes(e.target.value.toLowerCase().trim()) ||
+        product.description.toLowerCase().includes(e.target.value.toLowerCase().trim())
       );
     });
     showProductList();

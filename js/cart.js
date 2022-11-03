@@ -175,6 +175,7 @@ function showErrors(errors) {
   );
 }
 
+//Botón para cerrar el modal
 document.querySelector("#closebtn").onclick = () => {
   let div = document.querySelector("#closebtn").parentElement;
   div.style.opacity = "0";
@@ -183,6 +184,7 @@ document.querySelector("#closebtn").onclick = () => {
   }, 600);
 };
 
+//Botón finalizar compra
 form.onsubmit = (e) => {
   e.preventDefault();
 
@@ -336,6 +338,7 @@ function subtractOne(id) {
   const product = cartArray.find((product) => {
     return product.id === +id;
   });
+
   if (product.count > 1) {
     product.count -= 1;
     window.localStorage.setItem(
@@ -363,6 +366,7 @@ function setQty(id) {
   const product = cartArray.find((product) => {
     return product.id === +id;
   });
+
   if (inputQty.value >= 1) {
     product.count = +inputQty.value;
     window.localStorage.setItem(
@@ -405,13 +409,14 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "login.html";
   }
 
-  usuario = document.getElementById("navbarDarkDropdownMenuLink");
+  usuario = document.querySelector("#navbarDarkDropdownMenuLink");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
 
-  document.getElementById("log-out-btn").addEventListener("click", () => {
+  document.querySelector("#log-out-btn").onclick = () => {
     localStorage.removeItem("nombreUsuario");
-  });
+  };
 
+  //Cargo el carrito del local storage
   cartArray =
     JSON.parse(
       window.localStorage.getItem("cart" + window.localStorage.getItem("nombreUsuario"))

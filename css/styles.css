@@ -247,7 +247,6 @@ a.custom-card:hover {
 }
 
 .product-img {
-  max-height: 190px;
   max-width: 100%;
   margin: 0 0 5px;
   border-radius: 4px;

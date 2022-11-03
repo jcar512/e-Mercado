@@ -224,6 +224,46 @@ a.custom-card:hover {
   transition-delay: 200ms;
 }
 
+/* Product card */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.products {
+  margin-bottom: 20px;
+  height: auto;
+  margin-left: 10px;
+  position: relative;
+  padding-bottom: 40px;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: var(--light-grey);
+}
+
+.products:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+}
+
+.product-img {
+  max-height: 190px;
+  max-width: 100%;
+  margin: 0 0 5px;
+  border-radius: 4px;
+  align-self: center;
+}
+
+.flex-justify-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-card-description p {
+  margin: 8px 0;
+}
+
 .fa-star {
   color: var(--light-grey);
 }
@@ -269,7 +309,7 @@ a.custom-card:hover {
 }
 
 .product-description {
-  font-size: 16px;
+  font-size: 1.2rem;
 }
 
 #related-products {
@@ -557,7 +597,17 @@ input.qty {
   min-height: 75px;
 }
 
+@media (min-width: 992px) {
+  .products {
+    max-width: calc(25% - 10px);
+  }
+}
+
 @media (max-width: 991px) {
+  .products {
+    max-width: calc(50% - 10px);
+  }
+
   .info-adress-container {
     flex-direction: column;
   }
@@ -568,7 +618,15 @@ input.qty {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
+  .flex-div {
+    display: flex;
+  }
+
+  .align-text-right {
+    text-align: right;
+  }
+
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
@@ -579,6 +637,51 @@ input.qty {
 }
 
 @media (max-width: 768px) {
+  .card-container {
+    justify-content: center;
+  }
+
+  .products {
+    max-width: 100%;
+  }
+
+  .product-img-div {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .product-name {
+    text-align: center;
+  }
+
+  .product-price {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .flex-div {
+    display: block;
+  }
+
+  .align-text-right {
+    text-align: center;
+  }
+
+  .filter-inputs {
+    display: block;
+  }
+
+  .center-div {
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 0 25px;
+  }
+
+  .min-max-inp {
+    max-width: 150px;
+  }
+
   [class*="column-"] {
     flex-wrap: wrap;
   }

@@ -1,3 +1,8 @@
+//Chequeo que haya un usuario logeado
+if (window.localStorage.getItem("nombreUsuario") === null) {
+  window.location.href = "login.html";
+}
+
 const URL = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 const cartList = document.querySelector("#info-container");
 const items = document.querySelector("#items");
@@ -307,10 +312,6 @@ function removeItemAt(index) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.localStorage.getItem("nombreUsuario") == null) {
-    window.location.href = "login.html";
-  }
-
   usuario = document.querySelector("#navbarDarkDropdownMenuLink");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
 

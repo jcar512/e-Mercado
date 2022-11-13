@@ -1,3 +1,8 @@
+//Chequeo que haya un usuario logeado
+if (window.localStorage.getItem("nombreUsuario") === null) {
+  window.location.href = "login.html";
+}
+
 const ORDER_ASC_BY_COST = "09";
 const ORDER_DESC_BY_COST = "90";
 const ORDER_BY_SOLD_COUNT = "Cant.";
@@ -149,10 +154,6 @@ document.querySelector("#rangeFilterCount").onclick = () => {
 
 // Función que se ejecuta al cargar la página.
 document.addEventListener("DOMContentLoaded", function () {
-  if (window.localStorage.getItem("nombreUsuario") == null) {
-    window.location.href = "login.html";
-  }
-
   usuario = document.querySelector("#navbarDarkDropdownMenuLink");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
 

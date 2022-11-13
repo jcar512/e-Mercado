@@ -1,3 +1,7 @@
+if (window.localStorage.getItem("nombreUsuario") === null) {
+  window.location.href = "login.html";
+}
+
 //Form
 const profileForm = document.querySelector("#profile-form");
 
@@ -91,10 +95,6 @@ function validate({ name, lastName, email, phone }) {
 /* ------------------------------------------------------------------------ */
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.localStorage.getItem("nombreUsuario") == null) {
-    window.location.href = "login.html";
-  }
-
   usuario = document.getElementById("navbarDarkDropdownMenuLink");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
 

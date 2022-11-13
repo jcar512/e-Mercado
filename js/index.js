@@ -1,3 +1,8 @@
+//Chequeo que haya un usuario logeado
+if (window.localStorage.getItem("nombreUsuario") === null) {
+  window.location.href = "login.html";
+}
+
 //User
 const userID = window.localStorage.getItem("nombreUsuario");
 const users = JSON.parse(window.localStorage.getItem("users"));
@@ -15,11 +20,7 @@ const observer = new IntersectionObserver((entries) => {
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  /* Si no hay un usuario en el local storage se redirige a login */
-  if (window.localStorage.getItem("nombreUsuario") == null) {
-    window.location.href = "login.html";
-  }
+document.addEventListener("DOMContentLoaded", () => {
   /* Mostrar nombre de usuario */
   usuario = document.getElementById("navbarDarkDropdownMenuLink");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");

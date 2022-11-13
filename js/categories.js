@@ -1,3 +1,8 @@
+//Chequeo que haya un usuario logeado
+if (window.localStorage.getItem("nombreUsuario") === null) {
+  window.location.href = "login.html";
+}
+
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
 const ORDER_BY_PROD_COUNT = "Cant.";
@@ -107,11 +112,7 @@ function sortAndShowCategories(sortCriteria, categoriesArray) {
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function (e) {
-  /* Si no hay un usuario en el local storage se redirige a login */
-  if (window.localStorage.getItem("nombreUsuario") == null) {
-    window.location.href = "login.html";
-  }
+document.addEventListener("DOMContentLoaded", (e) => {
   /* Mostrar nombre de usuario */
   usuario = document.getElementById("navbarDarkDropdownMenuLink");
   usuario.innerHTML = window.localStorage.getItem("nombreUsuario");

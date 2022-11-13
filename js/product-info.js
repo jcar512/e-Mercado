@@ -1,3 +1,8 @@
+//Chequeo que haya un usuario logeado
+if (window.localStorage.getItem("nombreUsuario") === null) {
+  window.location.href = "login.html";
+}
+
 const PRODUCT_ID = window.localStorage.getItem("productID");
 const commentsList = document.querySelector("#product-comments");
 const submitBtn = document.querySelector("#review-submit");
@@ -110,10 +115,6 @@ document.querySelector("#stars").onclick = (e) => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  if (window.localStorage.getItem("nombreUsuario") == null) {
-    window.location.href = "login.html";
-  }
-
   let cart =
     JSON.parse(
       window.localStorage.getItem("cart" + window.localStorage.getItem("nombreUsuario"))

@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
       window.location.href = "index.html";
       window.localStorage.setItem("nombreUsuario", email.value);
 
-      //Chequear esto!!!!
+      //Guardo al usuario actual en caso de que aún no esté registrado
       if (users[window.localStorage.getItem("nombreUsuario")] === undefined) {
         const currentUser = {
           name: "",

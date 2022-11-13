@@ -7,6 +7,13 @@ let minCount = undefined;
 let maxCount = undefined;
 let initial;
 
+//User
+const userID = window.localStorage.getItem("nombreUsuario");
+const users = JSON.parse(window.localStorage.getItem("users"));
+const currentUser = users[userID];
+//Img de perfil
+const navbarProfImg = document.querySelector("#nav-profile-img");
+
 function setProductID(id) {
   localStorage.setItem("productID", id);
   window.location = "product-info.html";
@@ -152,6 +159,10 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector("#log-out-btn").onclick = () => {
     localStorage.removeItem("nombreUsuario");
   };
+
+  if (currentUser.profileImg !== "") {
+    navbarProfImg.src = currentUser.profileImg;
+  }
 
   // Agregué catID
   getJSONData(PRODUCTS_URL + window.localStorage.getItem("catID") + EXT_TYPE).then((resultado) => {

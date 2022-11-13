@@ -1,3 +1,10 @@
+//User
+const userID = window.localStorage.getItem("nombreUsuario");
+const users = JSON.parse(window.localStorage.getItem("users"));
+const currentUser = users[userID];
+//Img de perfil
+const navbarProfImg = document.querySelector("#nav-profile-img");
+
 const hidden = document.querySelectorAll(".hidden");
 
 const observer = new IntersectionObserver((entries) => {
@@ -37,4 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("log-out-btn").addEventListener("click", () => {
     localStorage.removeItem("nombreUsuario");
   });
+
+  if (currentUser.profileImg !== "") {
+    navbarProfImg.src = currentUser.profileImg;
+  }
 });

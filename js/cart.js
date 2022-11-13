@@ -8,6 +8,13 @@ let cartArray = [];
 let shippingTax = 0.05;
 let totalPrice;
 
+//User
+const userID = window.localStorage.getItem("nombreUsuario");
+const users = JSON.parse(window.localStorage.getItem("users"));
+const currentUser = users[userID];
+//Img de perfil
+const navbarProfImg = document.querySelector("#nav-profile-img");
+
 //Modal
 const modal = document.getElementById("myModal");
 const btn = document.getElementById("myBtn");
@@ -75,63 +82,7 @@ const cleaveBankAcc = new Cleave("#bank-acc", {
 
 //-----------------------------------------------------
 
-document.querySelector("#payment-method").onclick = (e) => {
-  if (+e.target.value === 1) {
-    document.querySelector("#payment-method-selected").innerText = "Tarjeta de crédito";
-
-    document.querySelector("#card-div").style.display = "flex";
-    document.querySelector("#bank-acc-div").style.display = "none";
-
-    //Remuevo el disabled de los input de tarjeta en caso de que lo haya
-    cardNum.removeAttribute("disabled");
-    cardSegCode.removeAttribute("disabled");
-    cardExpiration.removeAttribute("disabled");
-
-    //Añado required a los inputs de tarjeta
-    cardNum.setAttribute("required", "");
-    cardSegCode.setAttribute("required", "");
-    cardExpiration.setAttribute("required", "");
-
-    //Remuevo el required del input de cuenta bancaria
-    bankAcc.removeAttribute("required");
-
-    //Deshabilito el input de cuenta bancaria
-    bankAcc.setAttribute("disabled", "");
-
-    //Dejo el input de cuenta bancaria en blanco
-    bankAcc.value = "";
-  }
-
-  if (+e.target.value === 2) {
-    document.querySelector("#payment-method-selected").innerText = "Transferencia bancaria";
-
-    document.querySelector("#card-div").style.display = "none";
-    document.querySelector("#bank-acc-div").style.display = "flex";
-
-    //Remuevo el disabled del input de cuenta bancaria en caso de que lo haya
-    bankAcc.removeAttribute("disabled");
-
-    //Añado required al input de cuenta bancaria
-    bankAcc.setAttribute("required", "");
-
-    //Remuevo el required de los input de tarjeta
-    cardNum.removeAttribute("required");
-    cardSegCode.removeAttribute("required");
-    cardExpiration.removeAttribute("required");
-
-    //Deshabilito los inputs de tarjeta
-    cardNum.setAttribute("disabled", "");
-    cardSegCode.setAttribute("disabled", "");
-    cardExpiration.setAttribute("disabled", "");
-
-    //Dejo los inputs de tarjeta en blanco
-    cardNum.value = "";
-    cardSegCode.value = "";
-    cardExpiration.value = "";
-    cardBrand.setAttribute("class", "");
-  }
-};
-
+//Añade mensajes de error y bordes en rojo
 function setError(element, message) {
   const inputControl = element.parentElement;
   const errorDisplay = inputControl.querySelector(".error");
@@ -141,6 +92,7 @@ function setError(element, message) {
   errorDisplay.innerText = message;
 }
 
+//Quita mensaje de error y bordes rojos
 function setSuccess(element) {
   const inputControl = element.parentElement;
   const errorDisplay = inputControl.querySelector(".error");
@@ -150,6 +102,14 @@ function setSuccess(element) {
   errorDisplay.innerText = "";
 }
 
+//Llama a setError por cada error pasado
+function showErrors(errors) {
+  Object.entries(errors).forEach(([input, error]) =>
+    setError(document.getElementById(input), error)
+  );
+}
+
+//Validaciones
 function validate({ street, streetNum, streetCorner }) {
   const errors = {};
 
@@ -173,63 +133,7 @@ function validate({ street, streetNum, streetCorner }) {
   return errors;
 }
 
-function showErrors(errors) {
-  Object.entries(errors).forEach(([input, error]) =>
-    setError(document.getElementById(input), error)
-  );
-}
-
-//Botón para cerrar el alert
-document.querySelector("#closebtn").onclick = () => {
-  let div = document.querySelector("#closebtn").parentElement;
-  div.style.opacity = "0";
-  setTimeout(function () {
-    div.style.display = "none";
-  }, 600);
-};
-
-//Botón finalizar compra
-form.onsubmit = (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(e.target);
-  const values = {
-    street: formData.get("street"),
-    streetNum: formData.get("streetNum"),
-    streetCorner: formData.get("streetCorner"),
-  };
-
-  const errors = validate(values);
-
-  if (Object.keys(errors).length > 0) {
-    showErrors(errors);
-  }
-
-  if (!document.getElementById("modal-form").checkValidity()) {
-    setError(btn.parentElement, "Debe ingresar una forma de pago correcta");
-  } else {
-    setSuccess(btn.parentElement);
-  }
-
-  if (
-    document.getElementById("form").checkValidity() &&
-    document.getElementById("modal-form").checkValidity()
-  ) {
-    // mando datos al servidor
-    document.querySelector("#alert").style.display = "block";
-    setTimeout(function () {
-      document.querySelector("#alert").classList.add("show");
-    }, 30);
-
-    cartArray = [];
-    window.localStorage.setItem(
-      "cart" + window.localStorage.getItem("nombreUsuario"),
-      JSON.stringify(cartArray)
-    );
-    showCart(cartArray);
-  }
-};
-
+//Carrito vacío
 function noItems() {
   document.querySelector("main").innerHTML = `
     <div class="placeholder">
@@ -239,6 +143,7 @@ function noItems() {
     `;
 }
 
+//Mostrar carrito
 function showCart(array) {
   if (array.length === 0) {
     noItems();
@@ -338,6 +243,7 @@ function showCart(array) {
   totalToPay.innerHTML = totalPrice + Math.round(totalPrice * shippingTax);
 }
 
+/* ---------------------Funciones de suma/resta--------------------------- */
 function subtractOne(id) {
   const product = cartArray.find((product) => {
     return product.id === +id;
@@ -387,8 +293,9 @@ function setQty(id) {
     showCart(cartArray);
   }
 }
+/* ---------------------------------------------------------------------- */
 
-//Desafío
+//Función para borrar del carrito
 function removeItemAt(index) {
   const newArray = [...cartArray.slice(0, index), ...cartArray.slice(index + 1, cartArray.length)];
   cartArray = newArray;
@@ -398,15 +305,6 @@ function removeItemAt(index) {
   );
   showCart(cartArray);
 }
-
-//Radios envío
-document.querySelector("#shipping-type").onclick = (e) => {
-  if (e.target.value) {
-    shippingTax = e.target.value;
-    tax.innerHTML = Math.round(totalPrice * shippingTax);
-    totalToPay.innerHTML = totalPrice + Math.round(totalPrice * shippingTax);
-  }
-};
 
 document.addEventListener("DOMContentLoaded", () => {
   if (window.localStorage.getItem("nombreUsuario") == null) {
@@ -420,6 +318,10 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.removeItem("nombreUsuario");
   };
 
+  if (currentUser.profileImg !== "") {
+    navbarProfImg.src = currentUser.profileImg;
+  }
+
   //Cargo el carrito del local storage
   cartArray =
     JSON.parse(
@@ -427,4 +329,121 @@ document.addEventListener("DOMContentLoaded", () => {
     ) || [];
 
   showCart(cartArray);
+
+  document.querySelector("#payment-method").onclick = (e) => {
+    if (+e.target.value === 1) {
+      document.querySelector("#payment-method-selected").innerText = "Tarjeta de crédito";
+
+      document.querySelector("#card-div").style.display = "flex";
+      document.querySelector("#bank-acc-div").style.display = "none";
+
+      //Remuevo el disabled de los input de tarjeta en caso de que lo haya
+      cardNum.removeAttribute("disabled");
+      cardSegCode.removeAttribute("disabled");
+      cardExpiration.removeAttribute("disabled");
+
+      //Añado required a los inputs de tarjeta
+      cardNum.setAttribute("required", "");
+      cardSegCode.setAttribute("required", "");
+      cardExpiration.setAttribute("required", "");
+
+      //Remuevo el required del input de cuenta bancaria
+      bankAcc.removeAttribute("required");
+
+      //Deshabilito el input de cuenta bancaria
+      bankAcc.setAttribute("disabled", "");
+
+      //Dejo el input de cuenta bancaria en blanco
+      bankAcc.value = "";
+    }
+
+    if (+e.target.value === 2) {
+      document.querySelector("#payment-method-selected").innerText = "Transferencia bancaria";
+
+      document.querySelector("#card-div").style.display = "none";
+      document.querySelector("#bank-acc-div").style.display = "flex";
+
+      //Remuevo el disabled del input de cuenta bancaria en caso de que lo haya
+      bankAcc.removeAttribute("disabled");
+
+      //Añado required al input de cuenta bancaria
+      bankAcc.setAttribute("required", "");
+
+      //Remuevo el required de los input de tarjeta
+      cardNum.removeAttribute("required");
+      cardSegCode.removeAttribute("required");
+      cardExpiration.removeAttribute("required");
+
+      //Deshabilito los inputs de tarjeta
+      cardNum.setAttribute("disabled", "");
+      cardSegCode.setAttribute("disabled", "");
+      cardExpiration.setAttribute("disabled", "");
+
+      //Dejo los inputs de tarjeta en blanco
+      cardNum.value = "";
+      cardSegCode.value = "";
+      cardExpiration.value = "";
+      cardBrand.setAttribute("class", "");
+    }
+  };
+
+  //Botón para cerrar el alert
+  document.querySelector("#closebtn").onclick = () => {
+    let div = document.querySelector("#closebtn").parentElement;
+    div.style.opacity = "0";
+    setTimeout(function () {
+      div.style.display = "none";
+    }, 600);
+  };
+
+  //Botón finalizar compra
+  form.onsubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const values = {
+      street: formData.get("street"),
+      streetNum: formData.get("streetNum"),
+      streetCorner: formData.get("streetCorner"),
+    };
+
+    const errors = validate(values);
+
+    if (Object.keys(errors).length > 0) {
+      showErrors(errors);
+    }
+
+    if (!document.getElementById("modal-form").checkValidity()) {
+      setError(btn.parentElement, "Debe ingresar una forma de pago correcta");
+    } else {
+      setSuccess(btn.parentElement);
+    }
+
+    if (
+      document.getElementById("form").checkValidity() &&
+      document.getElementById("modal-form").checkValidity()
+    ) {
+      // mando datos al servidor
+      document.querySelector("#alert").style.display = "block";
+      setTimeout(function () {
+        document.querySelector("#alert").classList.add("show");
+      }, 30);
+
+      cartArray = [];
+      window.localStorage.setItem(
+        "cart" + window.localStorage.getItem("nombreUsuario"),
+        JSON.stringify(cartArray)
+      );
+      showCart(cartArray);
+    }
+  };
+
+  //Radios envío
+  document.querySelector("#shipping-type").onclick = (e) => {
+    if (e.target.value) {
+      shippingTax = e.target.value;
+      tax.innerHTML = Math.round(totalPrice * shippingTax);
+      totalToPay.innerHTML = totalPrice + Math.round(totalPrice * shippingTax);
+    }
+  };
 });

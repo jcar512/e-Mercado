@@ -29,6 +29,8 @@ closeBtn.onclick = function () {
   modal.style.display = "none";
 };
 
+//https://nosir.github.io/cleave.js/
+
 const cleaveStreetNum = new Cleave("#streetNum", {
   numericOnly: true,
   blocks: [4],
@@ -70,6 +72,8 @@ const cleaveBankAcc = new Cleave("#bank-acc", {
   numericOnly: true,
   blocks: [17],
 });
+
+//-----------------------------------------------------
 
 document.querySelector("#payment-method").onclick = (e) => {
   if (+e.target.value === 1) {
@@ -175,7 +179,7 @@ function showErrors(errors) {
   );
 }
 
-//Botón para cerrar el modal
+//Botón para cerrar el alert
 document.querySelector("#closebtn").onclick = () => {
   let div = document.querySelector("#closebtn").parentElement;
   div.style.opacity = "0";

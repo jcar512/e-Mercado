@@ -2,12 +2,36 @@ const loginButton = document.querySelector("#loginButton");
 
 document.addEventListener("DOMContentLoaded", function () {
   loginButton.onclick = () => {
+    if (window.localStorage.getItem("users") === null) {
+      const users = {};
+      window.localStorage.setItem("users", JSON.stringify(users));
+    }
+
     const email = document.querySelector("#typeEmailX-2");
     const pass = document.querySelector("#typePasswordX-2");
+
+    const users = JSON.parse(window.localStorage.getItem("users"));
 
     if (email.value != "" && pass.value != "") {
       window.location.href = "index.html";
       window.localStorage.setItem("nombreUsuario", email.value);
+
+      //Chequear esto!!!!
+      if (users[window.localStorage.getItem("nombreUsuario")] === undefined) {
+        const currentUser = {
+          name: "",
+          secondName: "",
+          lastName: "",
+          secondLastName: "",
+          email: email.value,
+          phone: "",
+          profileImg: "",
+        };
+
+        users[email.value] = currentUser;
+
+        window.localStorage.setItem("users", JSON.stringify(users));
+      }
     } else {
       document.querySelector("#email").innerHTML = `
       <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />

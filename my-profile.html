@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/popup.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <style>
       .bd-placeholder-img {
@@ -29,62 +30,160 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-bluish">
-      <div class="container">
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDarkDropdown"
-          aria-controls="navbarNavDarkDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-          <ul class="navbar-nav w-100">
-            <li class="nav-item nav-margin">
-              <a class="nav-link" href="index.html">Inicio</a>
-            </li>
-            <li class="nav-item nav-margin">
-              <a class="nav-link" href="categories.html">Categorías</a>
-            </li>
-            <li class="nav-item nav-margin">
-              <a class="nav-link" href="sell.html">Vender</a>
-            </li>
-          </ul>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-bluish">
+        <div class="container">
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDarkDropdown"
+            aria-controls="navbarNavDarkDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav w-100">
+              <li class="nav-item nav-margin">
+                <a class="nav-link" href="index.html">Inicio</a>
+              </li>
+              <li class="nav-item nav-margin">
+                <a class="nav-link" href="categories.html">Categorías</a>
+              </li>
+              <li class="nav-item nav-margin">
+                <a class="nav-link" href="sell.html">Vender</a>
+              </li>
+            </ul>
 
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle text-white"
-                href="#"
-                id="navbarDarkDropdownMenuLink"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-              </a>
-              <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
-                <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-                <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" id="log-out-btn" href="login.html">Cerrar sesión</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle text-white"
+                  href="#"
+                  id="navbarDarkDropdownMenuLink"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                </a>
+                <ul class="dropdown-menu dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                  <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" id="log-out-btn" href="login.html">Cerrar sesión</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
+      <div class="success-alert hidden" id="alert">
+        <span class="closebtn" id="closebtn">&times;</span>
+        Su perfil ha sido actualizado correctamente.
       </div>
-    </nav>
+    </header>
 
     <main>
       <div class="container">
-        <div class="alert alert-danger text-center" role="alert">
-          <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-        </div>
+        <form id="profile-form" novalidate>
+          <div class="prod-title justify-content-between">
+            <h1>Perfil</h1>
+            <img class="profile-img" id="profile-img" src="img\img_perfil.png" alt="">
+          </div>
+          
+          <hr>
+
+          <div class="profile-info">
+            <div class="profile-data">
+              <label for="profile_name">Primer nombre*</label>
+              <input 
+              id="profile_name" 
+              name="profile_name" 
+              class="form-control" 
+              type="text" 
+              required 
+              />
+              <div class="error invalid-feedback"></div>
+            </div>
+
+            <div class="profile-data">
+              <label for="profile_second_name">Segundo nombre</label>
+              <input 
+              id="profile_second_name" 
+              name="profile_second_name" 
+              class="form-control" 
+              type="text" 
+              />
+            </div>
+
+            <div class="profile-data">
+              <label for="profile_lastname">Primer Apellido*</label>
+              <input 
+              id="profile_lastname" 
+              name="profile_lastname" 
+              class="form-control" 
+              type="text" 
+              required 
+              />
+              <div class="error invalid-feedback"></div>
+            </div>
+
+            <div class="profile-data">
+              <label for="profile_second_lastname">Segundo Apellido</label>
+              <input 
+              id="profile_second_lastname" 
+              name="profile_second_lastname" 
+              class="form-control" 
+              type="text" 
+              />
+            </div>
+
+            <div class="profile-data">
+              <label for="profile_email">E-mail</label>
+              <input 
+              id="profile_email" 
+              name="profile_email" 
+              class="form-control" 
+              type="text" 
+              required 
+              />
+              <div class="error invalid-feedback"></div>
+            </div>
+
+            <div class="profile-data">
+              <label for="profile_phone">Teléfono de contacto*</label>
+              <input 
+              id="profile_phone" 
+              name="profile_phone" 
+              class="form-control" 
+              type="text" 
+              required 
+              />
+              <div class="error invalid-feedback"></div>
+            </div>
+
+            <div class="profile-img-div">
+              <label for="profile_img">Imagen de perfil</label>
+              <input 
+              type="file" 
+              id="new_profile_img" 
+              name="new_profile_img" 
+              class="form-control" 
+              accept=".jpg, .jpeg, .png" 
+              />
+            </div>
+          </div>
+
+          <hr>
+
+          <button type="submit" class="submit-bton">
+            <span class="btn-text">Guardar cambios</span>
+          </button>
+        </form>
       </div>
     </main>
     <footer class="text-muted">
@@ -102,6 +201,7 @@
         </p>
       </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/cleave.js@1.6.0/dist/cleave.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/init.js"></script>
     <script src="js/my-profile.js"></script>

@@ -6,6 +6,13 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
+//User
+const userID = window.localStorage.getItem("nombreUsuario");
+const users = JSON.parse(window.localStorage.getItem("users"));
+const currentUser = users[userID];
+//Img de perfil
+const navbarProfImg = document.querySelector("#nav-profile-img");
+
 function sortCategories(criteria, array) {
   let result = [];
   if (criteria === ORDER_ASC_BY_NAME) {
@@ -112,6 +119,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
   document.getElementById("log-out-btn").addEventListener("click", () => {
     localStorage.removeItem("nombreUsuario");
   });
+
+  if (currentUser.profileImg !== "") {
+    navbarProfImg.src = currentUser.profileImg;
+  }
 
   getJSONData(CATEGORIES_URL).then(function (resultObj) {
     if (resultObj.status === "ok") {

@@ -9,6 +9,13 @@ let PESO_SYMBOL = "UYU ";
 let PERCENTAGE_SYMBOL = "%";
 let MSG = "FUNCIONALIDAD NO IMPLEMENTADA";
 
+//User
+const userID = window.localStorage.getItem("nombreUsuario");
+const users = JSON.parse(window.localStorage.getItem("users"));
+const currentUser = users[userID];
+//Img de perfil
+const navbarProfImg = document.querySelector("#nav-profile-img");
+
 //Función que se utiliza para actualizar los costos de publicación
 function updateTotalCosts() {
   let unitProductCostHTML = document.getElementById("productCostText");
@@ -41,6 +48,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
   document.getElementById("log-out-btn").addEventListener("click", () => {
     localStorage.removeItem("nombreUsuario");
   });
+
+  if (currentUser.profileImg !== "") {
+    navbarProfImg.src = currentUser.profileImg;
+  }
 
   document.getElementById("productCountInput").addEventListener("change", function () {
     productCount = this.value;

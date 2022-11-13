@@ -5,6 +5,13 @@ const addToCartBtn = document.querySelector("#addToCartBtn");
 const newCommentText = document.querySelector("#new-comment-text");
 let selectedStar;
 
+//User
+const userID = window.localStorage.getItem("nombreUsuario");
+const users = JSON.parse(window.localStorage.getItem("users"));
+const currentUser = users[userID];
+//Img de perfil
+const navbarProfImg = document.querySelector("#nav-profile-img");
+
 function setProductID(id) {
   localStorage.setItem("productID", id);
   window.location = "product-info.html";
@@ -122,6 +129,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("log-out-btn").addEventListener("click", () => {
     localStorage.removeItem("nombreUsuario");
   });
+
+  if (currentUser.profileImg !== "") {
+    navbarProfImg.src = currentUser.profileImg;
+  }
 
   //Cargo la información del producto
   getJSONData(PRODUCT_INFO_URL + PRODUCT_ID + EXT_TYPE).then((res) => {

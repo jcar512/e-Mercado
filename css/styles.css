@@ -371,6 +371,15 @@ a.custom-card:hover {
   max-height: 100px;
 }
 
+.nav-profile-img {
+  max-height: 30px;
+}
+
+.nav-profile {
+  display: flex;
+  align-items: center;
+}
+
 .profile-info {
   display: flex;
   flex-wrap: wrap;

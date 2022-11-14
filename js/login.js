@@ -56,7 +56,7 @@ function validate({ loginEmail, loginPassword }) {
     setSuccess(loginInp);
   }
 
-  if (loginPassword === "") {
+  if (loginPassword === "" && loginEmail !== "") {
     errors.loginPassword = "Debe ingresar su contraseña.";
   } else {
     setSuccess(passwordInp);

@@ -1,3 +1,4 @@
+//Chequeo que haya un usuario logeado
 if (window.localStorage.getItem("nombreUsuario") === null) {
   window.location.href = "login.html";
 }
@@ -162,12 +163,24 @@ document.addEventListener("DOMContentLoaded", () => {
       showErrors(errors);
     }
 
-    if (profileForm.checkValidity()) {
+    if (profileForm.checkValidity() && Object.keys(errors).length === 0) {
+      //Chequeo si se cambia el email
+      if (values.email !== window.localStorage.getItem("nombreUsuario")) {
+        //Guardo los datos con el email como nuevo id
+        usuario.innerText = values.email;
+        window.localStorage.setItem("nombreUsuario", values.email);
+        users[values.email] = values;
+
+        //Borro el id del email anterior
+        delete users[userID];
+      } else {
+        users[userID] = values;
+      }
+
       if (values.profileImg !== "") {
         navbarProfImg.src = values.profileImg;
       }
 
-      users[userID] = values;
       window.localStorage.setItem("users", JSON.stringify(users));
 
       //Mostrar alert

@@ -1,20 +1,90 @@
-const loginButton = document.querySelector("#loginButton");
+//Creo users en el local storage en caso de que no exista
+if (window.localStorage.getItem("users") === null) {
+  const users = {};
+  window.localStorage.setItem("users", JSON.stringify(users));
+}
+
+//Usuarios
+const users = JSON.parse(window.localStorage.getItem("users"));
+
+//Form
+const loginForm = document.querySelector("#login-form");
+
+//Inputs
+const loginInp = document.querySelector("#loginEmail");
+const passwordInp = document.querySelector("#loginPassword");
+
+//Añade mensajes de error y bordes en rojo
+function setError(element, message) {
+  const inputControl = element.parentElement;
+  const errorDisplay = inputControl.querySelector(".error");
+
+  element.classList.remove("is-valid");
+  element.classList.add("is-invalid");
+  errorDisplay.innerText = message;
+}
+
+//Quita mensaje de error y bordes rojos
+function setSuccess(element) {
+  const inputControl = element.parentElement;
+  const errorDisplay = inputControl.querySelector(".error");
+
+  element.classList.remove("is-invalid");
+  errorDisplay.innerText = "";
+}
+
+//Llama a setError por cada error pasado
+function showErrors(errors) {
+  Object.entries(errors).forEach(([input, error]) =>
+    setError(document.getElementById(input), error)
+  );
+}
+
+//-------------------------Validaciones-----------------------------------
+function validateEmail(email) {
+  const re =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
+function validate({ loginEmail, loginPassword }) {
+  const errors = {};
+
+  if (loginEmail === "" || !validateEmail(loginEmail)) {
+    errors.loginEmail = "Debe ingresar un email válido.";
+  } else {
+    setSuccess(loginInp);
+  }
+
+  if (loginPassword === "") {
+    errors.loginPassword = "Debe ingresar su contraseña.";
+  } else {
+    setSuccess(passwordInp);
+  }
+  return errors;
+}
+
+/* ------------------------------------------------------------------------ */
 
 document.addEventListener("DOMContentLoaded", function () {
-  loginButton.onclick = () => {
-    if (window.localStorage.getItem("users") === null) {
-      const users = {};
-      window.localStorage.setItem("users", JSON.stringify(users));
+  loginForm.onsubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const values = {
+      loginEmail: formData.get("loginEmail"),
+      loginPassword: formData.get("loginPassword"),
+    };
+
+    const errors = validate(values);
+
+    if (Object.keys(errors).length > 0) {
+      showErrors(errors);
     }
 
-    const email = document.querySelector("#typeEmailX-2");
-    const pass = document.querySelector("#typePasswordX-2");
-
-    const users = JSON.parse(window.localStorage.getItem("users"));
-
-    if (email.value != "" && pass.value != "") {
+    if (loginForm.checkValidity() && Object.keys(errors).length === 0) {
       window.location.href = "index.html";
-      window.localStorage.setItem("nombreUsuario", email.value);
+      window.localStorage.setItem("nombreUsuario", values.loginEmail);
 
       //Guardo al usuario actual en caso de que aún no esté registrado
       if (users[window.localStorage.getItem("nombreUsuario")] === undefined) {
@@ -23,31 +93,15 @@ document.addEventListener("DOMContentLoaded", function () {
           secondName: "",
           lastName: "",
           secondLastName: "",
-          email: email.value,
+          email: values.loginEmail,
           phone: "",
           profileImg: "",
         };
 
-        users[email.value] = currentUser;
+        users[values.loginEmail] = currentUser;
 
         window.localStorage.setItem("users", JSON.stringify(users));
       }
-    } else {
-      document.querySelector("#email").innerHTML = `
-      <input type="email" id="typeEmailX-2" class="form-control form-control-lg" />
-      <label class="form-label" for="typeEmailX-2">Email</label>
-      <p class="text-danger">Ingrese su email</p>
-      `;
-      email.classList.add("border-danger");
-
-      document.querySelector("#password").innerHTML = `
-      <input type="password" id="typePasswordX-2" class="form-control form-control-lg" />
-      <label class="form-label" for="typePasswordX-2">Password</label>
-      <p class="text-danger">Ingrese su contraseña</p>
-      `;
-      pass.classList.add("border-danger");
     }
   };
 });
-
-//Tengo que corregir todo esto

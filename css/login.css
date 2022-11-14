@@ -1,0 +1,78 @@
+:root {
+  --light: #fff;
+  --light-grey: #adadad;
+  --orange: #ffa600;
+  --shadow-color: #b3b3b3da;
+  --border-color: #e2e2e2b6;
+  --blue: #3383fa;
+  --darker-blue: #3178e2;
+}
+
+.flex-section {
+  height: 70vh !important;
+  display: flex;
+  align-items: center;
+}
+
+.login-img {
+  height: 200px;
+}
+
+.login-container {
+  display: flex;
+  max-width: 300px;
+  padding: 3rem 3rem;
+  margin: 0 auto;
+  border-radius: 14px;
+  background-color: var(--light);
+  box-shadow: 2px 2px 6px 2px var(--shadow-color);
+}
+
+.login-container div {
+  margin-bottom: 15px;
+}
+
+.login-title {
+  text-align: center;
+}
+
+.google-log-in img {
+  margin: 0 8px;
+}
+
+.login-btn button {
+  width: 100%;
+  border-radius: 40px;
+}
+
+.or {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.or > span {
+  position: relative;
+  display: inline-block;
+}
+
+.or > span:before,
+.or > span:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 9999px;
+  height: 1px;
+  background: var(--shadow-color);
+}
+
+.or > span:before {
+  right: 100%;
+  margin-right: 15px;
+}
+
+.or > span:after {
+  left: 100%;
+  margin-left: 15px;
+}

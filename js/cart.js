@@ -430,6 +430,19 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#alert").classList.add("show");
       }, 30);
 
+      /*       let soldItems = {
+        user: userID,
+        articles: cartArray,
+      };
+
+      fetch("http://localhost:3000/routes/sold_products/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(soldItems),
+      }); */
+
       cartArray = [];
       window.localStorage.setItem(
         "cart" + window.localStorage.getItem("nombreUsuario"),

@@ -1,3 +1,3 @@
 # e-Mercado
 
-Introducir cualquier email y contraseña para ingresar
+Introducir cualquier email (ej: asd@gmail.com) y contraseña para ingresar

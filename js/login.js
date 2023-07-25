@@ -1,36 +1,36 @@
 //Creo users en el local storage en caso de que no exista
-if (window.localStorage.getItem("users") === null) {
+if (window.localStorage.getItem('users') === null) {
   const users = {};
-  window.localStorage.setItem("users", JSON.stringify(users));
+  window.localStorage.setItem('users', JSON.stringify(users));
 }
 
 //Usuarios
-const users = JSON.parse(window.localStorage.getItem("users"));
+const users = JSON.parse(window.localStorage.getItem('users'));
 
 //Form
-const loginForm = document.querySelector("#login-form");
+const loginForm = document.querySelector('#login-form');
 
 //Inputs
-const loginInp = document.querySelector("#loginEmail");
-const passwordInp = document.querySelector("#loginPassword");
+const loginInp = document.querySelector('#loginEmail');
+const passwordInp = document.querySelector('#loginPassword');
 
 //Añade mensajes de error y bordes en rojo
 function setError(element, message) {
   const inputControl = element.parentElement;
-  const errorDisplay = inputControl.querySelector(".error");
+  const errorDisplay = inputControl.querySelector('.error');
 
-  element.classList.remove("is-valid");
-  element.classList.add("is-invalid");
+  element.classList.remove('is-valid');
+  element.classList.add('is-invalid');
   errorDisplay.innerText = message;
 }
 
 //Quita mensaje de error y bordes rojos
 function setSuccess(element) {
   const inputControl = element.parentElement;
-  const errorDisplay = inputControl.querySelector(".error");
+  const errorDisplay = inputControl.querySelector('.error');
 
-  element.classList.remove("is-invalid");
-  errorDisplay.innerText = "";
+  element.classList.remove('is-invalid');
+  errorDisplay.innerText = '';
 }
 
 //Llama a setError por cada error pasado
@@ -50,14 +50,14 @@ function validateEmail(email) {
 function validate({ loginEmail, loginPassword }) {
   const errors = {};
 
-  if (loginEmail === "" || !validateEmail(loginEmail)) {
-    errors.loginEmail = "Debe ingresar un email válido.";
+  if (loginEmail === '' || !validateEmail(loginEmail)) {
+    errors.loginEmail = 'Debe ingresar un email válido.';
   } else {
     setSuccess(loginInp);
   }
 
-  if (loginPassword === "" && loginEmail !== "") {
-    errors.loginPassword = "Debe ingresar su contraseña.";
+  if (loginPassword === '' && loginEmail !== '') {
+    errors.loginPassword = 'Debe ingresar su contraseña.';
   } else {
     setSuccess(passwordInp);
   }
@@ -66,14 +66,14 @@ function validate({ loginEmail, loginPassword }) {
 
 /* ------------------------------------------------------------------------ */
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', function () {
   loginForm.onsubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const values = {
-      loginEmail: formData.get("loginEmail"),
-      loginPassword: formData.get("loginPassword"),
+      loginEmail: formData.get('loginEmail'),
+      loginPassword: formData.get('loginPassword'),
     };
 
     const errors = validate(values);
@@ -83,24 +83,24 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (loginForm.checkValidity() && Object.keys(errors).length === 0) {
-      window.location.href = "index.html";
-      window.localStorage.setItem("nombreUsuario", values.loginEmail);
+      window.location.href = 'index.html';
+      window.localStorage.setItem('nombreUsuario', values.loginEmail);
 
       //Guardo al usuario actual en caso de que aún no esté registrado
-      if (users[window.localStorage.getItem("nombreUsuario")] === undefined) {
+      if (users[window.localStorage.getItem('nombreUsuario')] === undefined) {
         const currentUser = {
-          name: "",
-          secondName: "",
-          lastName: "",
-          secondLastName: "",
+          name: '',
+          secondName: '',
+          lastName: '',
+          secondLastName: '',
           email: values.loginEmail,
-          phone: "",
-          profileImg: "",
+          phone: '',
+          profileImg: '',
         };
 
         users[values.loginEmail] = currentUser;
 
-        window.localStorage.setItem("users", JSON.stringify(users));
+        window.localStorage.setItem('users', JSON.stringify(users));
       }
     }
   };

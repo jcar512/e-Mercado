@@ -2,7 +2,10 @@
 <html lang="es">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>eMercado - Todo lo que busques está aquí</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -52,7 +55,12 @@
             </ul>
 
             <ul class="navbar-nav nav-profile">
-              <img class="nav-profile-img" id="nav-profile-img" src="img\img_perfil.png" alt="" />
+              <img
+                class="nav-profile-img"
+                id="nav-profile-img"
+                src="img\img_perfil.png"
+                alt=""
+              />
               <li class="nav-item dropdown">
                 <a
                   class="nav-link dropdown-toggle text-white"
@@ -67,11 +75,19 @@
                   class="dropdown-menu dropdown-menu"
                   aria-labelledby="navbarDarkDropdownMenuLink"
                 >
-                  <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
-                  <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+                  <li>
+                    <a class="dropdown-item" href="my-profile.html"
+                      >Mi perfil</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="cart.html">Mi carrito</a>
+                  </li>
                   <li><hr class="dropdown-divider" /></li>
                   <li>
-                    <a class="dropdown-item" id="log-out-btn" href="login.html">Cerrar sesión</a>
+                    <a class="dropdown-item" id="log-out-btn" href="login.html"
+                      >Cerrar sesión</a
+                    >
                   </li>
                 </ul>
               </li>
@@ -100,9 +116,21 @@
               <form id="form" novalidate>
                 <h1>Tipo de envío</h1>
                 <div class="shipping-type" id="shipping-type">
-                  <input type="radio" name="shipping-option" id="premium" value="0.15" required />
+                  <input
+                    type="radio"
+                    name="shipping-option"
+                    id="premium"
+                    value="0.15"
+                    required
+                  />
                   <label for="premium">Premium 2 a 5 días (15%)</label><br />
-                  <input type="radio" name="shipping-option" id="express" value="0.07" required />
+                  <input
+                    type="radio"
+                    name="shipping-option"
+                    id="express"
+                    value="0.07"
+                    required
+                  />
                   <label for="express">Express 5 a 8 días (7%)</label><br />
                   <input
                     type="radio"
@@ -118,7 +146,13 @@
                 <div class="adress">
                   <div class="street">
                     <p class="mb-1">Calle</p>
-                    <input class="form-control" type="text" id="street" name="street" required />
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="street"
+                      name="street"
+                      required
+                    />
                     <div class="error invalid-feedback"></div>
                   </div>
 
@@ -147,24 +181,33 @@
                   </div>
                 </div>
                 <div class="subtotal">
-                  <div class="d-flex align-items-center justify-content-between">
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
                     <h5 class="mt-2">Subtotal</h5>
                     <div class="item_price">
-                      <span>USD </span><span class="cart-price" id="subtotal-all"></span>
+                      <span>USD </span
+                      ><span class="cart-price" id="subtotal-all"></span>
                     </div>
                   </div>
 
-                  <div class="d-flex align-items-center justify-content-between">
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
                     <h5 class="">Envío</h5>
                     <div class="item_price">
-                      <span>USD </span><span class="cart-price" id="shipping-tax"></span>
+                      <span>USD </span
+                      ><span class="cart-price" id="shipping-tax"></span>
                     </div>
                   </div>
 
-                  <div class="d-flex align-items-center justify-content-between">
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
                     <h1 class="">Total</h1>
                     <div class="item_price">
-                      <span>USD </span><span class="cart-price" id="total-amount"></span>
+                      <span>USD </span
+                      ><span class="cart-price" id="total-amount"></span>
                     </div>
                   </div>
                 </div>
@@ -173,8 +216,12 @@
                   <h1>Forma de pago</h1>
                   <div>
                     <div class="choose-payment d-flex align-items-center">
-                      <span class="pe-2" id="payment-method-selected">No ha seleccionado</span>
-                      <button class="btn btn-link ps-0" id="myBtn">Seleccionar</button>
+                      <span class="pe-2" id="payment-method-selected"
+                        >No ha seleccionado</span
+                      >
+                      <button class="btn btn-link ps-0" id="myBtn">
+                        Seleccionar
+                      </button>
                     </div>
                     <div class="error invalid-feedback"></div>
                   </div>
@@ -222,7 +269,9 @@
                           required
                         />
                       </div>
-                      <div class="card__col card__brand"><i id="cardBrand"></i></div>
+                      <div class="card__col card__brand">
+                        <i id="cardBrand"></i>
+                      </div>
                     </div>
                     <div class="card-seg-code">
                       <p>Código de seg.</p>
@@ -263,7 +312,12 @@
                   <div class="bank-acc" id="bank-acc-div" style="display: none">
                     <div class="">
                       <p>Número de cuenta</p>
-                      <input class="modal-inpt" type="text" id="bank-acc" required />
+                      <input
+                        class="modal-inpt"
+                        type="text"
+                        id="bank-acc"
+                        required
+                      />
                     </div>
                   </div>
                 </div>

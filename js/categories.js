@@ -1,22 +1,20 @@
-//Chequeo que haya un usuario logeado
-if (window.localStorage.getItem("nombreUsuario") === null) {
-  window.location.href = "login.html";
+if (window.localStorage.getItem('nombreUsuario') === null) {
+  window.location.href = 'login.html';
 }
 
-const ORDER_ASC_BY_NAME = "AZ";
-const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COUNT = "Cant.";
+const ORDER_ASC_BY_NAME = 'AZ';
+const ORDER_DESC_BY_NAME = 'ZA';
+const ORDER_BY_PROD_COUNT = 'Cant.';
 let currentCategoriesArray = [];
 let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
-//User
-const userID = window.localStorage.getItem("nombreUsuario");
-const users = JSON.parse(window.localStorage.getItem("users"));
+const userID = window.localStorage.getItem('nombreUsuario');
+const users = JSON.parse(window.localStorage.getItem('users'));
 const currentUser = users[userID];
-//Img de perfil
-const navbarProfImg = document.querySelector("#nav-profile-img");
+
+const navbarProfImg = document.querySelector('#nav-profile-img');
 
 function sortCategories(criteria, array) {
   let result = [];
@@ -59,18 +57,19 @@ function sortCategories(criteria, array) {
 }
 
 function setCatID(id) {
-  localStorage.setItem("catID", id);
-  window.location = "products.html";
+  localStorage.setItem('catID', id);
+  window.location = 'products.html';
 }
 
 function showCategoriesList() {
-  let htmlContentToAppend = "";
+  let htmlContentToAppend = '';
   for (let i = 0; i < currentCategoriesArray.length; i++) {
     let category = currentCategoriesArray[i];
 
     if (
       (minCount == undefined ||
-        (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
+        (minCount != undefined &&
+          parseInt(category.productCount) >= minCount)) &&
       (maxCount == undefined ||
         (maxCount != undefined && parseInt(category.productCount) <= maxCount))
     ) {
@@ -92,7 +91,8 @@ function showCategoriesList() {
         `;
     }
 
-    document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+    document.getElementById('cat-list-container').innerHTML =
+      htmlContentToAppend;
   }
 }
 
@@ -103,76 +103,75 @@ function sortAndShowCategories(sortCriteria, categoriesArray) {
     currentCategoriesArray = categoriesArray;
   }
 
-  currentCategoriesArray = sortCategories(currentSortCriteria, currentCategoriesArray);
+  currentCategoriesArray = sortCategories(
+    currentSortCriteria,
+    currentCategoriesArray
+  );
 
-  //Muestro las categorías ordenadas
   showCategoriesList();
 }
 
-//Función que se ejecuta una vez que se haya lanzado el evento de
-//que el documento se encuentra cargado, es decir, se encuentran todos los
-//elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", (e) => {
-  /* Mostrar nombre de usuario */
-  usuario = document.getElementById("navbarDarkDropdownMenuLink");
-  usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
+document.addEventListener('DOMContentLoaded', (e) => {
+  usuario = document.getElementById('navbarDarkDropdownMenuLink');
+  usuario.innerHTML = window.localStorage.getItem('nombreUsuario');
 
-  document.getElementById("log-out-btn").addEventListener("click", () => {
-    localStorage.removeItem("nombreUsuario");
+  document.getElementById('log-out-btn').addEventListener('click', () => {
+    localStorage.removeItem('nombreUsuario');
   });
 
-  if (currentUser.profileImg !== "") {
+  if (currentUser.profileImg !== '') {
     navbarProfImg.src = currentUser.profileImg;
   }
 
   getJSONData(CATEGORIES_URL).then(function (resultObj) {
-    if (resultObj.status === "ok") {
+    if (resultObj.status === 'ok') {
       currentCategoriesArray = resultObj.data;
       showCategoriesList();
-      //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
     }
   });
 
-  document.getElementById("sortAsc").addEventListener("click", function () {
+  document.getElementById('sortAsc').addEventListener('click', function () {
     sortAndShowCategories(ORDER_ASC_BY_NAME);
   });
 
-  document.getElementById("sortDesc").addEventListener("click", function () {
+  document.getElementById('sortDesc').addEventListener('click', function () {
     sortAndShowCategories(ORDER_DESC_BY_NAME);
   });
 
-  document.getElementById("sortByCount").addEventListener("click", function () {
+  document.getElementById('sortByCount').addEventListener('click', function () {
     sortAndShowCategories(ORDER_BY_PROD_COUNT);
   });
 
-  document.getElementById("clearRangeFilter").addEventListener("click", function () {
-    document.getElementById("rangeFilterCountMin").value = "";
-    document.getElementById("rangeFilterCountMax").value = "";
+  document
+    .getElementById('clearRangeFilter')
+    .addEventListener('click', function () {
+      document.getElementById('rangeFilterCountMin').value = '';
+      document.getElementById('rangeFilterCountMax').value = '';
 
-    minCount = undefined;
-    maxCount = undefined;
-
-    showCategoriesList();
-  });
-
-  document.getElementById("rangeFilterCount").addEventListener("click", function () {
-    //Obtengo el mínimo y máximo de los intervalos para filtrar por cantidad
-    //de productos por categoría.
-    minCount = document.getElementById("rangeFilterCountMin").value;
-    maxCount = document.getElementById("rangeFilterCountMax").value;
-
-    if (minCount != undefined && minCount != "" && parseInt(minCount) >= 0) {
-      minCount = parseInt(minCount);
-    } else {
       minCount = undefined;
-    }
-
-    if (maxCount != undefined && maxCount != "" && parseInt(maxCount) >= 0) {
-      maxCount = parseInt(maxCount);
-    } else {
       maxCount = undefined;
-    }
 
-    showCategoriesList();
-  });
+      showCategoriesList();
+    });
+
+  document
+    .getElementById('rangeFilterCount')
+    .addEventListener('click', function () {
+      minCount = document.getElementById('rangeFilterCountMin').value;
+      maxCount = document.getElementById('rangeFilterCountMax').value;
+
+      if (minCount != undefined && minCount != '' && parseInt(minCount) >= 0) {
+        minCount = parseInt(minCount);
+      } else {
+        minCount = undefined;
+      }
+
+      if (maxCount != undefined && maxCount != '' && parseInt(maxCount) >= 0) {
+        maxCount = parseInt(maxCount);
+      } else {
+        maxCount = undefined;
+      }
+
+      showCategoriesList();
+    });
 });

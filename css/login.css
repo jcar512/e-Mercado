@@ -52,13 +52,13 @@
   white-space: nowrap;
 }
 
-.or > span {
+.or>span {
   position: relative;
   display: inline-block;
 }
 
-.or > span:before,
-.or > span:after {
+.or>span:before,
+.or>span:after {
   content: "";
   position: absolute;
   top: 50%;
@@ -67,12 +67,12 @@
   background: var(--shadow-color);
 }
 
-.or > span:before {
+.or>span:before {
   right: 100%;
   margin-right: 15px;
 }
 
-.or > span:after {
+.or>span:after {
   left: 100%;
   margin-left: 15px;
 }

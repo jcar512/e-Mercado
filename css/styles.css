@@ -373,13 +373,13 @@ a.custom-card:hover {
   float: right;
 }
 
-.stars input:not(:checked) ~ label:hover,
-.stars input:not(:checked) ~ label:hover ~ label {
+.stars input:not(:checked)~label:hover,
+.stars input:not(:checked)~label:hover~label {
   color: var(--orange);
   cursor: pointer;
 }
 
-.stars input:checked ~ label {
+.stars input:checked~label {
   color: var(--orange);
 }
 
@@ -613,6 +613,7 @@ input.qty {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
   }
+
   .jumbotron {
     padding-top: 6rem;
     padding-bottom: 6rem;
@@ -673,12 +674,15 @@ input.qty {
   [class*="column-"] {
     flex-wrap: wrap;
   }
+
   .column-2-right {
     margin: 40px 0 0 0;
   }
+
   .related-prod-div {
     margin: 10px 10px 0 0;
   }
+
   .prod-title {
     display: flex;
     align-items: center;

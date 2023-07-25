@@ -1,39 +1,39 @@
 //Chequeo que haya un usuario logeado
-if (window.localStorage.getItem("nombreUsuario") === null) {
-  window.location.href = "login.html";
+if (window.localStorage.getItem('nombreUsuario') === null) {
+  window.location.href = 'login.html';
 }
 
-const PRODUCT_ID = window.localStorage.getItem("productID");
-const commentsList = document.querySelector("#product-comments");
-const submitBtn = document.querySelector("#review-submit");
-const addToCartBtn = document.querySelector("#addToCartBtn");
-const newCommentText = document.querySelector("#new-comment-text");
+const PRODUCT_ID = window.localStorage.getItem('productID');
+const commentsList = document.querySelector('#product-comments');
+const submitBtn = document.querySelector('#review-submit');
+const addToCartBtn = document.querySelector('#addToCartBtn');
+const newCommentText = document.querySelector('#new-comment-text');
 let selectedStar;
 
 //User
-const userID = window.localStorage.getItem("nombreUsuario");
-const users = JSON.parse(window.localStorage.getItem("users"));
+const userID = window.localStorage.getItem('nombreUsuario');
+const users = JSON.parse(window.localStorage.getItem('users'));
 const currentUser = users[userID];
 //Img de perfil
-const navbarProfImg = document.querySelector("#nav-profile-img");
+const navbarProfImg = document.querySelector('#nav-profile-img');
 
 function setProductID(id) {
-  localStorage.setItem("productID", id);
-  window.location = "product-info.html";
+  localStorage.setItem('productID', id);
+  window.location = 'product-info.html';
 }
 
 function showProduct(product) {
-  const indicators = document.querySelector("#carousel-indicators");
-  const carousel = document.querySelector("#carousel-inner");
-  const name = document.querySelector("#product-name");
-  const cost = document.querySelector("#product-cost");
-  const description = document.querySelector("#product-description");
-  const category = document.querySelector("#product-category");
-  const soldCount = document.querySelector("#product-sold-count");
-  const relatedProductsImages = document.querySelector("#related-products");
+  const indicators = document.querySelector('#carousel-indicators');
+  const carousel = document.querySelector('#carousel-inner');
+  const name = document.querySelector('#product-name');
+  const cost = document.querySelector('#product-cost');
+  const description = document.querySelector('#product-description');
+  const category = document.querySelector('#product-category');
+  const soldCount = document.querySelector('#product-sold-count');
+  const relatedProductsImages = document.querySelector('#related-products');
 
   name.innerHTML = product.name;
-  cost.innerHTML = product.currency + " " + product.cost;
+  cost.innerHTML = product.currency + ' ' + product.cost;
   description.innerHTML = product.description;
   category.innerHTML = product.category;
   soldCount.innerHTML = product.soldCount;
@@ -87,7 +87,7 @@ function loadComments(comments) {
 }
 
 function starRating(rate) {
-  htmlToAppend = "";
+  htmlToAppend = '';
 
   for (i = 0; i < 5; i++) {
     if (i < rate) {
@@ -108,36 +108,39 @@ function addZeroLeft(num) {
   return num < 10 ? `0${num}` : num;
 }
 
-document.querySelector("#stars").onclick = (e) => {
+document.querySelector('#stars').onclick = (e) => {
   if (e.target.value) {
     selectedStar = e.target.value;
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   let cart =
     JSON.parse(
-      window.localStorage.getItem("cart" + window.localStorage.getItem("nombreUsuario"))
+      window.localStorage.getItem(
+        'cart' + window.localStorage.getItem('nombreUsuario')
+      )
     ) || [];
 
   let newCartItem;
 
-  let newCommentArray = JSON.parse(window.localStorage.getItem(PRODUCT_ID)) || [];
+  let newCommentArray =
+    JSON.parse(window.localStorage.getItem(PRODUCT_ID)) || [];
 
-  usuario = document.getElementById("navbarDarkDropdownMenuLink");
-  usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
+  usuario = document.getElementById('navbarDarkDropdownMenuLink');
+  usuario.innerHTML = window.localStorage.getItem('nombreUsuario');
 
-  document.getElementById("log-out-btn").addEventListener("click", () => {
-    localStorage.removeItem("nombreUsuario");
+  document.getElementById('log-out-btn').addEventListener('click', () => {
+    localStorage.removeItem('nombreUsuario');
   });
 
-  if (currentUser.profileImg !== "") {
+  if (currentUser.profileImg !== '') {
     navbarProfImg.src = currentUser.profileImg;
   }
 
   //Cargo la información del producto
   getJSONData(PRODUCT_INFO_URL + PRODUCT_ID + EXT_TYPE).then((res) => {
-    if (res.status === "ok") {
+    if (res.status === 'ok') {
       let product = res.data;
       newCartItem = {
         id: product.id,
@@ -163,23 +166,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     window.localStorage.setItem(
-      "cart" + window.localStorage.getItem("nombreUsuario"),
+      'cart' + window.localStorage.getItem('nombreUsuario'),
       JSON.stringify(cart)
     );
-    window.location = "cart.html";
+    window.location = 'cart.html';
   };
 
   //Cargo los comentarios
   getJSONData(PRODUCT_INFO_COMMENTS_URL + PRODUCT_ID + EXT_TYPE).then((res) => {
-    if (res.status === "ok") {
+    if (res.status === 'ok') {
       let comments = res.data;
       loadComments(comments);
       loadComments(newCommentArray);
     }
   });
 
-  submitBtn.addEventListener("click", (e) => {
-    if (newCommentText.value != "" && selectedStar) {
+  submitBtn.addEventListener('click', (e) => {
+    if (newCommentText.value != '' && selectedStar) {
       let today = new Date();
 
       let month = today.getMonth() + 1;
@@ -194,20 +197,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let currentTime = `${hours}:${minutes}:${seconds}`;
 
-      let currentDateTime = currentDate + " " + currentTime;
+      let currentDateTime = currentDate + ' ' + currentTime;
 
       newCommentArray.push({
         product: PRODUCT_ID,
         score: selectedStar,
         description: newCommentText.value,
-        user: window.localStorage.getItem("nombreUsuario"),
+        user: window.localStorage.getItem('nombreUsuario'),
         dateTime: currentDateTime,
       });
       window.localStorage.setItem(PRODUCT_ID, JSON.stringify(newCommentArray));
       commentsList.innerHTML += `
         <div class="customer-comment">
           <div class="name-and-date">
-            <div class="profile-name">${window.localStorage.getItem("nombreUsuario")}</div>
+            <div class="profile-name">${window.localStorage.getItem(
+              'nombreUsuario'
+            )}</div>
             <div class="comment-date">${currentDateTime}</div>
           </div>
           <div class="rating">
@@ -219,8 +224,8 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         `;
 
-      newCommentText.value = "";
-      document.querySelectorAll(".stars-input").forEach((e) => {
+      newCommentText.value = '';
+      document.querySelectorAll('.stars-input').forEach((e) => {
         e.checked = false;
       });
       e.preventDefault();

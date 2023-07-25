@@ -1,37 +1,39 @@
 //Chequeo que haya un usuario logeado
-if (window.localStorage.getItem("nombreUsuario") === null) {
-  window.location.href = "login.html";
+if (window.localStorage.getItem('nombreUsuario') === null) {
+  window.location.href = 'login.html';
 }
 
 let productCost = 0;
 let productCount = 0;
 let comissionPercentage = 0.13;
-let MONEY_SYMBOL = "$";
-let DOLLAR_CURRENCY = "Dólares (USD)";
-let PESO_CURRENCY = "Pesos Uruguayos (UYU)";
-let DOLLAR_SYMBOL = "USD ";
-let PESO_SYMBOL = "UYU ";
-let PERCENTAGE_SYMBOL = "%";
-let MSG = "FUNCIONALIDAD NO IMPLEMENTADA";
+let MONEY_SYMBOL = '$';
+let DOLLAR_CURRENCY = 'Dólares (USD)';
+let PESO_CURRENCY = 'Pesos Uruguayos (UYU)';
+let DOLLAR_SYMBOL = 'USD ';
+let PESO_SYMBOL = 'UYU ';
+let PERCENTAGE_SYMBOL = '%';
+let MSG = 'FUNCIONALIDAD NO IMPLEMENTADA';
 
 //User
-const userID = window.localStorage.getItem("nombreUsuario");
-const users = JSON.parse(window.localStorage.getItem("users"));
+const userID = window.localStorage.getItem('nombreUsuario');
+const users = JSON.parse(window.localStorage.getItem('users'));
 const currentUser = users[userID];
 //Img de perfil
-const navbarProfImg = document.querySelector("#nav-profile-img");
+const navbarProfImg = document.querySelector('#nav-profile-img');
 
 //Función que se utiliza para actualizar los costos de publicación
 function updateTotalCosts() {
-  let unitProductCostHTML = document.getElementById("productCostText");
-  let comissionCostHTML = document.getElementById("comissionText");
-  let totalCostHTML = document.getElementById("totalCostText");
+  let unitProductCostHTML = document.getElementById('productCostText');
+  let comissionCostHTML = document.getElementById('comissionText');
+  let totalCostHTML = document.getElementById('totalCostText');
 
   let unitCostToShow = MONEY_SYMBOL + productCost;
-  let comissionToShow = Math.round(comissionPercentage * 100) + PERCENTAGE_SYMBOL;
+  let comissionToShow =
+    Math.round(comissionPercentage * 100) + PERCENTAGE_SYMBOL;
   let totalCostToShow =
     MONEY_SYMBOL +
-    (Math.round(productCost * comissionPercentage * 100) / 100 + parseInt(productCost));
+    (Math.round(productCost * comissionPercentage * 100) / 100 +
+      parseInt(productCost));
 
   unitProductCostHTML.innerHTML = unitCostToShow;
   comissionCostHTML.innerHTML = comissionToShow;
@@ -41,97 +43,107 @@ function updateTotalCosts() {
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
-document.addEventListener("DOMContentLoaded", function (e) {
+document.addEventListener('DOMContentLoaded', function (e) {
   /* Mostrar nombre de usuario */
-  usuario = document.getElementById("navbarDarkDropdownMenuLink");
-  usuario.innerHTML = window.localStorage.getItem("nombreUsuario");
+  usuario = document.getElementById('navbarDarkDropdownMenuLink');
+  usuario.innerHTML = window.localStorage.getItem('nombreUsuario');
 
-  document.getElementById("log-out-btn").addEventListener("click", () => {
-    localStorage.removeItem("nombreUsuario");
+  document.getElementById('log-out-btn').addEventListener('click', () => {
+    localStorage.removeItem('nombreUsuario');
   });
 
-  if (currentUser.profileImg !== "") {
+  if (currentUser.profileImg !== '') {
     navbarProfImg.src = currentUser.profileImg;
   }
 
-  document.getElementById("productCountInput").addEventListener("change", function () {
-    productCount = this.value;
-    updateTotalCosts();
-  });
+  document
+    .getElementById('productCountInput')
+    .addEventListener('change', function () {
+      productCount = this.value;
+      updateTotalCosts();
+    });
 
-  document.getElementById("productCostInput").addEventListener("change", function () {
-    productCost = this.value;
-    updateTotalCosts();
-  });
+  document
+    .getElementById('productCostInput')
+    .addEventListener('change', function () {
+      productCost = this.value;
+      updateTotalCosts();
+    });
 
-  document.getElementById("goldradio").addEventListener("change", function () {
+  document.getElementById('goldradio').addEventListener('change', function () {
     comissionPercentage = 0.13;
     updateTotalCosts();
   });
 
-  document.getElementById("premiumradio").addEventListener("change", function () {
-    comissionPercentage = 0.07;
-    updateTotalCosts();
-  });
+  document
+    .getElementById('premiumradio')
+    .addEventListener('change', function () {
+      comissionPercentage = 0.07;
+      updateTotalCosts();
+    });
 
-  document.getElementById("standardradio").addEventListener("change", function () {
-    comissionPercentage = 0.03;
-    updateTotalCosts();
-  });
+  document
+    .getElementById('standardradio')
+    .addEventListener('change', function () {
+      comissionPercentage = 0.03;
+      updateTotalCosts();
+    });
 
-  document.getElementById("productCurrency").addEventListener("change", function () {
-    if (this.value == DOLLAR_CURRENCY) {
-      MONEY_SYMBOL = DOLLAR_SYMBOL;
-    } else if (this.value == PESO_CURRENCY) {
-      MONEY_SYMBOL = PESO_SYMBOL;
-    }
+  document
+    .getElementById('productCurrency')
+    .addEventListener('change', function () {
+      if (this.value == DOLLAR_CURRENCY) {
+        MONEY_SYMBOL = DOLLAR_SYMBOL;
+      } else if (this.value == PESO_CURRENCY) {
+        MONEY_SYMBOL = PESO_SYMBOL;
+      }
 
-    updateTotalCosts();
-  });
+      updateTotalCosts();
+    });
 
   //Configuraciones para el elemento que sube archivos
   let dzoptions = {
-    url: "/",
+    url: '/',
     autoQueue: false,
   };
-  let myDropzone = new Dropzone("div#file-upload", dzoptions);
+  let myDropzone = new Dropzone('div#file-upload', dzoptions);
 
   //Se obtiene el formulario de publicación de producto
-  let sellForm = document.getElementById("sell-info");
+  let sellForm = document.getElementById('sell-info');
 
   //Se agrega una escucha en el evento 'submit' que será
   //lanzado por el formulario cuando se seleccione 'Vender'.
-  sellForm.addEventListener("submit", function (e) {
+  sellForm.addEventListener('submit', function (e) {
     e.preventDefault();
     e.preventDefault();
 
-    let productNameInput = document.getElementById("productName");
-    let productCategory = document.getElementById("productCategory");
-    let productCost = document.getElementById("productCostInput");
+    let productNameInput = document.getElementById('productName');
+    let productCategory = document.getElementById('productCategory');
+    let productCost = document.getElementById('productCostInput');
     let infoMissing = false;
 
     //Quito las clases que marcan como inválidos
-    productNameInput.classList.remove("is-invalid");
-    productCategory.classList.remove("is-invalid");
-    productCost.classList.remove("is-invalid");
+    productNameInput.classList.remove('is-invalid');
+    productCategory.classList.remove('is-invalid');
+    productCost.classList.remove('is-invalid');
 
     //Se realizan los controles necesarios,
     //En este caso se controla que se haya ingresado el nombre y categoría.
     //Consulto por el nombre del producto
-    if (productNameInput.value === "") {
-      productNameInput.classList.add("is-invalid");
+    if (productNameInput.value === '') {
+      productNameInput.classList.add('is-invalid');
       infoMissing = true;
     }
 
     //Consulto por la categoría del producto
-    if (productCategory.value === "") {
-      productCategory.classList.add("is-invalid");
+    if (productCategory.value === '') {
+      productCategory.classList.add('is-invalid');
       infoMissing = true;
     }
 
     //Consulto por el costo
     if (productCost.value <= 0) {
-      productCost.classList.add("is-invalid");
+      productCost.classList.add('is-invalid');
       infoMissing = true;
     }
 
@@ -140,22 +152,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
       //la solicitud para crear la publicación.
 
       getJSONData(PUBLISH_PRODUCT_URL).then(function (resultObj) {
-        let msgToShowHTML = document.getElementById("resultSpan");
-        let msgToShow = "";
+        let msgToShowHTML = document.getElementById('resultSpan');
+        let msgToShow = '';
 
         //Si la publicación fue exitosa, devolverá mensaje de éxito,
         //de lo contrario, devolverá mensaje de error.
         //FUNCIONALIDAD NO IMPLEMENTADA
-        if (resultObj.status === "ok") {
+        if (resultObj.status === 'ok') {
           msgToShow = MSG;
-          document.getElementById("alertResult").classList.add("alert-primary");
-        } else if (resultObj.status === "error") {
+          document.getElementById('alertResult').classList.add('alert-primary');
+        } else if (resultObj.status === 'error') {
           msgToShow = MSG;
-          document.getElementById("alertResult").classList.add("alert-primary");
+          document.getElementById('alertResult').classList.add('alert-primary');
         }
 
         msgToShowHTML.innerHTML = msgToShow;
-        document.getElementById("alertResult").classList.add("show");
+        document.getElementById('alertResult').classList.add('show');
       });
     }
   });

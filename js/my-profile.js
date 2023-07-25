@@ -1,18 +1,14 @@
-//Chequeo que haya un usuario logeado
 if (window.localStorage.getItem('nombreUsuario') === null) {
   window.location.href = 'login.html';
 }
 
-//Form
 const profileForm = document.querySelector('#profile-form');
 
-//User
 const userID = window.localStorage.getItem('nombreUsuario');
 const users = JSON.parse(window.localStorage.getItem('users'));
 const currentUser = users[userID];
 let imgUrl = currentUser.profileImg;
 
-//Inputs
 const profileName = document.querySelector('#profile_name');
 const profileSeconName = document.querySelector('#profile_second_name');
 const profileLastname = document.querySelector('#profile_lastname');
@@ -21,19 +17,16 @@ const profileSecondLastname = document.querySelector(
 );
 const profileEmail = document.querySelector('#profile_email');
 const profilePhone = document.querySelector('#profile_phone');
-const newProfileImg = document.querySelector('#new_profile_img'); //Input nueva img
+const newProfileImg = document.querySelector('#new_profile_img');
 
-//Img de perfil
 const navbarProfImg = document.querySelector('#nav-profile-img');
 const profileImg = document.querySelector('#profile-img');
 
-//Formato de numero de teléfono con Cleave https://nosir.github.io/cleave.js/
 const cleavePhone = new Cleave('#profile_phone', {
   numericOnly: true,
   blocks: [3, 3, 3],
 });
 
-//Añade mensajes de error y bordes en rojo
 function setError(element, message) {
   const inputControl = element.parentElement;
   const errorDisplay = inputControl.querySelector('.error');
@@ -43,7 +36,6 @@ function setError(element, message) {
   errorDisplay.innerText = message;
 }
 
-//Quita mensaje de error y bordes rojos
 function setSuccess(element) {
   const inputControl = element.parentElement;
   const errorDisplay = inputControl.querySelector('.error');
@@ -52,14 +44,12 @@ function setSuccess(element) {
   errorDisplay.innerText = '';
 }
 
-//Llama a setError por cada error pasado
 function showErrors(errors) {
   Object.entries(errors).forEach(([input, error]) =>
     setError(document.getElementById(input), error)
   );
 }
 
-//-------------------------Validaciones-----------------------------------
 function validateEmail(email) {
   const re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -95,8 +85,6 @@ function validate({ name, lastName, email, phone }) {
   return errors;
 }
 
-/* ------------------------------------------------------------------------ */
-
 document.addEventListener('DOMContentLoaded', () => {
   usuario = document.getElementById('navbarDarkDropdownMenuLink');
   usuario.innerHTML = window.localStorage.getItem('nombreUsuario');
@@ -105,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('nombreUsuario');
   });
 
-  //Le doy los valores guardados a los input y la imagen de perfil
   profileName.value = currentUser.name;
   profileSeconName.value = currentUser.secondName;
   profileLastname.value = currentUser.lastName;
@@ -117,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
     profileImg.src = currentUser.profileImg;
   }
 
-  //Botón para cerrar el alert
   document.querySelector('#closebtn').onclick = () => {
     let div = document.querySelector('#closebtn').parentElement;
     div.style.opacity = '0';
@@ -127,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 600);
   };
 
-  //Imagen de perfil
   newProfileImg.onchange = () => {
     const fileRead = new FileReader();
 
@@ -144,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  //Guardar cambios
   profileForm.onsubmit = (e) => {
     e.preventDefault();
 
@@ -166,14 +150,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (profileForm.checkValidity() && Object.keys(errors).length === 0) {
-      //Chequeo si se cambia el email
       if (values.email !== window.localStorage.getItem('nombreUsuario')) {
-        //Guardo los datos con el email como nuevo id
         usuario.innerText = values.email;
         window.localStorage.setItem('nombreUsuario', values.email);
         users[values.email] = values;
 
-        //Borro el id del email anterior
         delete users[userID];
       } else {
         users[userID] = values;
@@ -185,7 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       window.localStorage.setItem('users', JSON.stringify(users));
 
-      //Mostrar alert
       document.querySelector('#alert').style.opacity = '100';
       document.querySelector('#alert').style.display = 'block';
       setTimeout(function () {

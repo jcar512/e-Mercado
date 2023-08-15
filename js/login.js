@@ -11,8 +11,8 @@ const users = JSON.parse(window.localStorage.getItem('users'));
 const loginForm = document.querySelector('#login-form');
 
 //Inputs
-const loginInp = document.querySelector('#loginEmail');
-const passwordInp = document.querySelector('#loginPassword');
+const loginInput = document.querySelector('#loginEmail');
+const passwordInput = document.querySelector('#loginPassword');
 
 //Añade mensajes de error y bordes en rojo
 function setError(element, message) {
@@ -53,13 +53,13 @@ function validate({ loginEmail, loginPassword }) {
   if (loginEmail === '' || !validateEmail(loginEmail)) {
     errors.loginEmail = 'Debe ingresar un email válido.';
   } else {
-    setSuccess(loginInp);
+    setSuccess(loginInput);
   }
 
   if (loginPassword === '' && loginEmail !== '') {
     errors.loginPassword = 'Debe ingresar su contraseña.';
   } else {
-    setSuccess(passwordInp);
+    setSuccess(passwordInput);
   }
   return errors;
 }
@@ -67,6 +67,9 @@ function validate({ loginEmail, loginPassword }) {
 /* ------------------------------------------------------------------------ */
 
 document.addEventListener('DOMContentLoaded', function () {
+  loginInput.value = 'user@gmail.com';
+  passwordInput.value = 'asdasd';
+
   loginForm.onsubmit = (e) => {
     e.preventDefault();
 
